@@ -10,6 +10,7 @@ import Contrataciones from "./views/contrataciones";
 import Notificaciones from "./views/notificaciones";
 import Perfil from "./views/perfil";
 import Registro from "./views/registro";
+import Recupero from "./views/recupero";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="registro" element={<Registro />} />
+          <Route path="recupero" element={<Recupero />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>

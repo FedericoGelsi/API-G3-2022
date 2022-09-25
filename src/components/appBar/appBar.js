@@ -10,10 +10,29 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
 import { MenuBook, Notifications } from "@mui/icons-material";
-const pages = ["Inicio", "Mis cursos", "Contrataciones"];
-const settings = ["Profile", "Logout"];
+import { Link } from "react-router-dom";
+import AppLogo from "./appLogo";
+
+
+class Page {
+  constructor(link, name) {
+    this.link = link;
+    this.name = name;
+  }
+}
+
+const pages = [
+  new Page("/inicio", "Inicio"),
+  new Page("/mis-cursos", "Mis Cursos"),
+  new Page("/contrataciones", "Contrataciones"),
+];
+
+const settings = [
+  new Page("/perfil", "Perfil"),
+  new Page("/login", "Logout")
+];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,32 +54,13 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="sticky">
+      <Container>
         <Toolbar>
-          <MenuBook
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1, height: 32, width: 32 }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 500,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            FOR EDUCATION
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, }}>
+          {/* XS Components */}
+          <Box sx={{ flexGrow: 2, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -87,46 +87,50 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Link to={page.link}>
+                  <MenuItem key={page.link} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
-          <MenuBook sx={{ display: { xs: "flex", md: "none" }, mr: 1 , height: 32, width: 32 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href=""
+          <AppLogo variant="xs"/>
+          {/* MD Components */}
+          <AppLogo variant="md"/>
+          <Box
             sx={{
-              mr: 1,
-              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontWeight: 500,
-              color: "inherit",
-              textDecoration: "none",
+              display: { xs: "none", md: "flex" },
+              justifyContent: "flex-end",
+              paddingX: 2,
             }}
           >
-            FOR EDUCATION
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end", paddingX: 2 }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link to={page.link}>
+                <Button
+                  key={page.link}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.name}
+                </Button>
+              </Link>
             ))}
-            <Button>
-              <Notifications
-                key={"Notifications"}
-                sx={{ my: 2, color: "white", display: "block" , height:32, width:32}}
-              />
-            </Button>
+            <Link to={"notificaciones"}>
+              <Button>
+                <Notifications
+                  key={"Notifications"}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    height: 32,
+                    width: 32,
+                  }}
+                />
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -152,9 +156,11 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <Link to={setting.link}>
+                <MenuItem key={setting.link} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>

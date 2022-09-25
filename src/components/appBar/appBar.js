@@ -11,7 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import { MenuBook, Notifications } from "@mui/icons-material";
+import { Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import AppLogo from "./appLogo";
 
@@ -24,7 +24,7 @@ class Page {
 }
 
 const pages = [
-  new Page("/inicio", "Inicio"),
+  new Page("/", "Inicio"),
   new Page("/mis-cursos", "Mis Cursos"),
   new Page("/contrataciones", "Contrataciones"),
 ];
@@ -69,7 +69,7 @@ const ResponsiveAppBar = () => {
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id="menu-appbars"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
@@ -88,7 +88,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <Link to={page.link}>
-                  <MenuItem key={page.link} onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </MenuItem>
                 </Link>
@@ -109,7 +109,6 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               <Link to={page.link}>
                 <Button
-                  key={page.link}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
@@ -117,10 +116,9 @@ const ResponsiveAppBar = () => {
                 </Button>
               </Link>
             ))}
-            <Link to={"notificaciones"}>
+            <Link to={"/notificaciones"}>
               <Button>
                 <Notifications
-                  key={"Notifications"}
                   sx={{
                     my: 2,
                     color: "white",
@@ -157,7 +155,7 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <Link to={setting.link}>
-                <MenuItem key={setting.link} onClick={handleCloseUserMenu}>
+                <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
                 </Link>

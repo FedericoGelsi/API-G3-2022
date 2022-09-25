@@ -1,7 +1,7 @@
 import { Box, Container } from "@mui/material";
 import ResponsiveAppBar from "../components/appBar/appBar";
 
-function MisCursos(props) {
+function Perfil(props) {
   return (
     <Box>
       <ResponsiveAppBar />
@@ -10,4 +10,4 @@ function MisCursos(props) {
   );
 }
 
-export default MisCursos;
+export default Perfil;

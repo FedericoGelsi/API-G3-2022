@@ -1,12 +1,17 @@
 import { ThemeProvider } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import * as React from "react";
-import ResponsiveAppBar from "./components/appBar/appBar";
 import { theme } from "./components/theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./views/login.js";
 import Inicio from "./views/inicio";
-import Registrarse from "./views/registrarse";
+import MisCursos from "./views/mis-cursos";
+import Contrataciones from "./views/contrataciones";
+import Notificaciones from "./views/notificaciones";
+import Perfil from "./views/perfil";
+import Registro from "./views/registro";
+import Recupero from "./views/recupero";
+import { PrivateRoutes } from "./components/PrivateRoutes";
 import Olvido from "./views/olvido"
 
 function App() {
@@ -15,16 +20,19 @@ function App() {
       <CssBaseline enableColorScheme />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login/>}/>
-          <Route path="login" element={<Login/>}/>
-          <Route path="registrarse" element={<Registrarse/>}/>
+          <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<Inicio />} />
+            <Route path="mis-cursos" element={<MisCursos />} />
+            <Route path="contrataciones" element={<Contrataciones />} />
+          
+            <Route path="notificaciones" element={<Notificaciones />} />
+            <Route path="perfil" element={<Perfil />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="registro" element={<Registro />} />
+          <Route path="recupero" element={<Recupero />} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="olvido" element={<Olvido/>}/>
-          <Route path="inicio" element={<Inicio/>}/>
-          <Route path="mis-cursos" element={<h1>Mis Cursos</h1>}/>
-          <Route path="contrataciones" element={<h1>Contrataciones</h1>}/>
-          <Route path="notificaciones" element={<h1>Notificaciones</h1>}/>
-          <Route path="perfil" element={<h1>Perfil</h1>}/>
-          {/* <Route path="*" element={<h1>404 Not Found</h1>}/> */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

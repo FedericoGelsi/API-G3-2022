@@ -140,12 +140,8 @@ const LoginForm = ({ setAuth }) => {
                 label="Recuerdame"
               />
 
-              <Link
-                component={RouterLink}
-                variant="subtitle2"
-                to="#"
-                underline="hover"
-              >
+              <Link component={RouterLink} variant="subtitle2" to="/olvido" underline="hover" >
+              
                 Olvido su contraseña?
               </Link>
             </Stack>

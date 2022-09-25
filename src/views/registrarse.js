@@ -2,10 +2,8 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
-
-import SocialAuth from "../components/login/SocialAuth";
-import SignupForm from "../components/login/SignupForm";
-import Logo from "../components/login/Logo";
+import RegistroForm from "../components/login/registroForm";
+import Logo from "../components/login/loginLogo";
 import { motion } from "framer-motion";
 
 //////////////////////////////////
@@ -54,23 +52,15 @@ const Registro = ({ setAuth }) => {
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
             <Logo />
-
-            <Typography sx={{ color: "text.secondary", mb: 5 }}>
-              Ingrese sus datos:
-            </Typography>
+            <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
+                <Typography sx={{ color: "text.secondary" }}>
+                Ingrese los siguientes datos:
+                </Typography>
+            </Divider>
           </HeadingStyle>
 
-          <Box component={motion.div} {...fadeInUp}>
-            <SocialAuth />
-          </Box>
-
-          <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              O registrarse con:
-            </Typography>
-          </Divider>
-
-          <SignupForm setAuth={setAuth} />
+          
+          <RegistroForm setAuth={setAuth} />
 
           <Typography
             component={motion.p}
@@ -79,13 +69,13 @@ const Registro = ({ setAuth }) => {
             align="center"
             sx={{ color: "text.secondary", mt: 2 }}
           >
-            By registering, I agree to{" "}
+            Al registrarme, acepto los siguientes:{" "}
             <Link underline="always" color="text.primary" href="#">
-              Terms of Service
+              Terminos de Servicio
             </Link>{" "}
             &{" "}
             <Link underline="always" color="text.primary" href="#">
-              Privacy Policy
+              Politica de Privacidad
             </Link>
             .
           </Typography>
@@ -97,7 +87,7 @@ const Registro = ({ setAuth }) => {
             align="center"
             sx={{ mt: 3 }}
           >
-            Have an account?{" "}
+            Ya posee una cuenta?{" "}
             <Link variant="subtitle2" component={RouterLink} to="/login">
               Login
             </Link>

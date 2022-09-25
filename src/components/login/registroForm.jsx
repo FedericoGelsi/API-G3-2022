@@ -25,24 +25,24 @@ const animate = {
   },
 };
 
-const SignupForm = ({ setAuth }) => {
+const RegistroForm = ({ setAuth }) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
-      .min(2, "Muy corto!")
-      .max(50, "Muy largo!")
-      .required("Es necesario ingresar Nombre"),
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("First name required"),
     lastName: Yup.string()
-      .min(2, "Muy corto!")
-      .max(50, "Muy largo!")
-      .required("Es necesario ingresar Apellido"),
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Last name required"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
-    password: Yup.string().required("Es necesario ingresar Password"),
+    password: Yup.string().required("Password is required"),
   });
 
   const formik = useFormik({
@@ -84,7 +84,7 @@ const SignupForm = ({ setAuth }) => {
 
             <TextField
               fullWidth
-              label="Apellido/s"
+              label="Apelllido/s"
               {...getFieldProps("lastName")}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
@@ -101,7 +101,7 @@ const SignupForm = ({ setAuth }) => {
               fullWidth
               autoComplete="username"
               type="email"
-              label="Email address"
+              label="Direccion de mail"
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
@@ -111,7 +111,7 @@ const SignupForm = ({ setAuth }) => {
               fullWidth
               autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              label="Password"
+              label="Contraseña"
               {...getFieldProps("password")}
               InputProps={{
                 endAdornment: (
@@ -146,7 +146,7 @@ const SignupForm = ({ setAuth }) => {
               variant="contained"
               loading={isSubmitting}
             >
-              Sign up
+              Registrarse
             </LoadingButton>
           </Box>
         </Stack>
@@ -155,4 +155,4 @@ const SignupForm = ({ setAuth }) => {
   );
 };
 
-export default SignupForm;
+export default RegistroForm;

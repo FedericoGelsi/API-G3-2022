@@ -6,6 +6,7 @@ import { theme } from "./components/theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./views/login.js";
 import Inicio from "./views/inicio";
+import Registrarse from "./views/registrarse";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login/>}/>
           <Route path="login" element={<Login/>}/>
+          <Route path="registrarse" element={<Registrarse/>}/>
           <Route path="inicio" element={<Inicio/>}/>
           <Route path="mis-cursos" element={<h1>Mis Cursos</h1>}/>
           <Route path="contrataciones" element={<h1>Contrataciones</h1>}/>

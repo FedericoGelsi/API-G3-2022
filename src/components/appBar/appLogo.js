@@ -59,7 +59,3 @@ function AppLogo(props) {
 }
 
 export default AppLogo;
-
-function getFlexProperties(){
-    
-}

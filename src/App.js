@@ -12,7 +12,7 @@ import Perfil from "./views/perfil";
 import Registro from "./views/registro";
 import Recupero from "./views/recupero";
 import { PrivateRoutes } from "./components/PrivateRoutes";
-import Olvido from "./views/olvido"
+import Olvido from "./views/olvido";
 
 function App() {
   return (
@@ -24,7 +24,6 @@ function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="mis-cursos" element={<MisCursos />} />
             <Route path="contrataciones" element={<Contrataciones />} />
-          
             <Route path="notificaciones" element={<Notificaciones />} />
             <Route path="perfil" element={<Perfil />} />
           </Route>
@@ -32,7 +31,7 @@ function App() {
           <Route path="registro" element={<Registro />} />
           <Route path="recupero" element={<Recupero />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
-          <Route path="olvido" element={<Olvido/>}/>
+          <Route path="olvido" element={<Olvido />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

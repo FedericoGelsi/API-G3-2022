@@ -38,8 +38,10 @@ const LoginForm = ({ setAuth }) => {
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email("Ingrese un mail valido")
-      .required("Es necesario ingresar mail"),
-    password: Yup.string().required("Es necesario ingresar la contraseña"),
+      .required("Es necesario completar este campo"),
+    password: Yup.string()
+      .min(8,"Valor muy corto")
+      .required("Es necesario completar este campo"),
   });
 
   const formik = useFormik({

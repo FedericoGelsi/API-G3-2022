@@ -28,7 +28,7 @@ const OlvidoForm = ({ setAuth }) => {
   const OlvidoSchema = Yup.object().shape({
     email: Yup.string()
       .email("Debe ingresar un mail valido")
-      .required("Es necesario ingresar mail"),
+      .required("Es necesario completar este campo"),
   });
 
   const formik = useFormik({

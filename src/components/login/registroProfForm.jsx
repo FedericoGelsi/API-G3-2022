@@ -25,26 +25,38 @@ const animate = {
   },
 };
 
-const RecuperoForm = ({ setAuth }) => {
+const RegistroFormProf = ({ setAuth }) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showRePassword, setShowRePassword] = useState(false);
 
   const SignupSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(2, "valor muy corto")
+      .max(50, "valor muy largo")
+      .required("Es necesario completar este campo"),
+    lastName: Yup.string()
+      .min(2, "valor muy corto")
+      .max(50, "valor muy largo")
+      .required("Es necesario completar este campo"),
+    email: Yup.string()
+      .email("Debe ingresaar un mail valido")
+      .required("Es necesario completar este campo"),
     password: Yup.string()
-      .min(8,"Valor muy corto")
-      .required("es necesario completar este campo"),
-
-    rePassword: Yup.string()
-      .min(8,"Valor muy corto")
-      .required("es necesario completar este campo"),
+    .min(8,"valor muy corto")
+    .required("Es necesario completar este campo"),
   });
 
   const formik = useFormik({
     initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
       password: "",
-      rePassword:"",
+      telefono:"",
+      bornDate:"",
+      titulo:"",
+      experiencia:"",
     },
     validationSchema: SignupSchema,
     onSubmit: () => {
@@ -61,6 +73,29 @@ const RecuperoForm = ({ setAuth }) => {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
+          <Stack
+            component={motion.div}
+            initial={{ opacity: 0, y: 60 }}
+            animate={animate}
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+          >
+            <TextField
+              fullWidth
+              label="Nombre/s"
+              {...getFieldProps("firstName")}
+              error={Boolean(touched.firstName && errors.firstName)}
+              helperText={touched.firstName && errors.firstName}
+            />
+
+            <TextField
+              fullWidth
+              label="Apelllido/s"
+              {...getFieldProps("lastName")}
+              error={Boolean(touched.lastName && errors.lastName)}
+              helperText={touched.lastName && errors.lastName}
+            />
+          </Stack>
 
           <Stack
             spacing={3}
@@ -68,12 +103,21 @@ const RecuperoForm = ({ setAuth }) => {
             initial={{ opacity: 0, y: 40 }}
             animate={animate}
           >
+            <TextField
+              fullWidth
+              autoComplete="username"
+              type="email"
+              label="Direccion de mail"
+              {...getFieldProps("email")}
+              error={Boolean(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
+            />
 
             <TextField
               fullWidth
               autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              label="Nueva Contraseña"
+              label="Contraseña"
               {...getFieldProps("password")}
               InputProps={{
                 endAdornment: (
@@ -94,34 +138,6 @@ const RecuperoForm = ({ setAuth }) => {
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
             />
-
-            <TextField
-              fullWidth
-              autoComplete="current-password"
-              type={showRePassword ? "text" : "password"}
-              label="Reingrese su Nueva Contraseña"
-              {...getFieldProps("rePassword")}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      edge="end"
-                      onClick={() => setShowRePassword((prev) => !prev)}
-                    >
-                      <Icon
-                        icon={
-                          showRePassword ? "eva:eye-fill" : "eva:eye-off-fill"
-                        }
-                      />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={Boolean(touched.rePassword && errors.rePassword)}
-              helperText={touched.rePassword && errors.rePassword}
-            />
-
-
           </Stack>
 
           <Box
@@ -136,7 +152,7 @@ const RecuperoForm = ({ setAuth }) => {
               variant="contained"
               loading={isSubmitting}
             >
-              {isSubmitting? "Modificando..." : "Modificar Contraseña"}
+              Registrarse
             </LoadingButton>
           </Box>
         </Stack>
@@ -145,4 +161,4 @@ const RecuperoForm = ({ setAuth }) => {
   );
 };
 
-export default RecuperoForm;
+export default RegistroFormProf;

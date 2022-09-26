@@ -2,7 +2,7 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
-import RegistroForm from "../components/login/registroForm";
+import RecuperoForm from "../components/login/recuperoForm";
 import Logo from "../components/login/loginLogo";
 import { motion } from "framer-motion";
 
@@ -45,7 +45,7 @@ const fadeInUp = {
   },
 };
 
-const Registro = ({ setAuth }) => {
+const Recupero = ({ setAuth }) => {
   return (
     <RootStyle>
       <Container maxWidth="sm">
@@ -54,32 +54,15 @@ const Registro = ({ setAuth }) => {
             <Logo />
             <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
                 <Typography sx={{ color: "text.secondary" }}>
-                Ingrese los siguientes datos:
+                Complete los siguientes campos:
                 </Typography>
             </Divider>
           </HeadingStyle>
 
           
-          <RegistroForm setAuth={setAuth} />
+          <RecuperoForm setAuth={setAuth} />
 
-          <Typography
-            component={motion.p}
-            {...fadeInUp}
-            variant="body2"
-            align="center"
-            sx={{ color: "text.secondary", mt: 2 }}
-          >
-            Al registrarme, acepto los siguientes:{" "}
-            <Link underline="always" color="text.primary" href="#">
-              Terminos de Servicio
-            </Link>{" "}
-            &{" "}
-            <Link underline="always" color="text.primary" href="#">
-              Politica de Privacidad
-            </Link>
-            .
-          </Typography>
-
+          
           <Typography
             component={motion.p}
             {...fadeInUp}
@@ -87,7 +70,7 @@ const Registro = ({ setAuth }) => {
             align="center"
             sx={{ mt: 3 }}
           >
-            Ya posee una cuenta?{" "}
+            Ir a Iniciar Sesion{" "}
             <Link variant="subtitle2" component={RouterLink} to="/login">
               Login
             </Link>
@@ -98,4 +81,4 @@ const Registro = ({ setAuth }) => {
   );
 };
 
-export default Registro;
+export default Recupero;

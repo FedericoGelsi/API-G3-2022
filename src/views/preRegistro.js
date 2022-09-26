@@ -2,7 +2,6 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
-import RegistroForm from "../components/login/registroForm";
 import Logo from "../components/login/loginLogo";
 import { motion } from "framer-motion";
 
@@ -45,6 +44,7 @@ const fadeInUp = {
   },
 };
 
+
 const Registro = ({ setAuth }) => {
   return (
     <RootStyle>
@@ -54,44 +54,28 @@ const Registro = ({ setAuth }) => {
             <Logo />
             <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
                 <Typography sx={{ color: "text.secondary" }}>
-                Ingrese los siguientes datos:
+                Elija el perfil con el que se quiere registrar:
                 </Typography>
             </Divider>
           </HeadingStyle>
 
-          
-          <RegistroForm setAuth={setAuth} />
-
-          <Typography
-            component={motion.p}
-            {...fadeInUp}
-            variant="body2"
-            align="center"
-            sx={{ color: "text.secondary", mt: 2 }}
-          >
-            Al registrarme, acepto los siguientes:{" "}
-            <Link underline="always" color="text.primary" href="#">
-              Terminos de Servicio
-            </Link>{" "}
-            &{" "}
-            <Link underline="always" color="text.primary" href="#">
-              Politica de Privacidad
+          <Typography component={motion.p} {...fadeInUp} align="center" sx={{ mt: 1 }} >
+            
+            <Link component={RouterLink} to="/registroAlum">
+              Registrarme como Alumno 
+              
             </Link>
-            .
+
           </Typography>
 
-          <Typography
-            component={motion.p}
-            {...fadeInUp}
-            variant="body2"
-            align="center"
-            sx={{ mt: 3 }}
-          >
-            Ya posee una cuenta?{" "}
-            <Link variant="subtitle2" component={RouterLink} to="/login">
-              Login
+          <Typography component={motion.p} {...fadeInUp} align="center" sx={{ mt: 1 }} >
+            
+            <Link component={RouterLink} to="/registroProf">
+              Registrarme como Profesor 
             </Link>
+
           </Typography>
+
         </ContentStyle>
       </Container>
     </RootStyle>
@@ -99,3 +83,6 @@ const Registro = ({ setAuth }) => {
 };
 
 export default Registro;
+
+
+

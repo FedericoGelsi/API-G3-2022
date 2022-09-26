@@ -15,7 +15,6 @@ import { Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import AppLogo from "./appLogo";
 
-
 class Page {
   constructor(link, name) {
     this.link = link;
@@ -29,10 +28,7 @@ const pages = [
   new Page("/contrataciones", "Contrataciones"),
 ];
 
-const settings = [
-  new Page("/perfil", "Perfil"),
-  new Page("/login", "Logout")
-];
+const settings = [new Page("/perfil", "Perfil"), new Page("/login", "Logout")];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -54,7 +50,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{mb:5}}>
+    <AppBar position="sticky" sx={{ mb: 5 }}>
       <Container>
         <Toolbar>
           {/* XS Components */}
@@ -87,7 +83,10 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <Link to={page.link}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={page.link}
+                >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </MenuItem>
@@ -95,9 +94,9 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          <AppLogo variant="xs"/>
+          <AppLogo variant="xs" />
           {/* MD Components */}
-          <AppLogo variant="md"/>
+          <AppLogo variant="md" />
           <Box
             sx={{
               flexGrow: 1,
@@ -107,17 +106,21 @@ const ResponsiveAppBar = () => {
             }}
           >
             {pages.map((page) => (
-              <Link to={page.link}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={page.link}
                 >
                   {page.name}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             ))}
-            <Link to={"/notificaciones"}>
-              <Button>
+
+            <Button>
+              <Link to={"/notificaciones"}>
                 <Notifications
                   sx={{
                     my: 2,
@@ -127,8 +130,8 @@ const ResponsiveAppBar = () => {
                     width: 32,
                   }}
                 />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -154,10 +157,13 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <Link to={setting.link}>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting.name}</Typography>
-                </MenuItem>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={setting.link}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  </MenuItem>
                 </Link>
               ))}
             </Menu>

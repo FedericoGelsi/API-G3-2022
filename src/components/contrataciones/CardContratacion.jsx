@@ -79,6 +79,9 @@ function CardContratacion(props) {
               <Typography variant="subtitle1">
                 Materia: {course.subject}
               </Typography>
+              <Typography variant="subtitle1">
+                Solicitada por: {props.contratacion.student.getFullName()}
+              </Typography>
             </CardContent>
             <Stack
               direction="column"
@@ -113,7 +116,7 @@ function CardContratacion(props) {
             open={open}
             onClick={handleClose}
           >
-            <CardContact user={course.professor} />
+            <CardContact user={props.contratacion.student} />
           </Backdrop>
         </CardActions>
       </Stack>

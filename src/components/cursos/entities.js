@@ -21,6 +21,10 @@ export class User{
         this.birthdate = birthdate;
         this.password = password;
     }
+
+    getFullName(){
+        return this.firstname + " " + this.lastname;
+    }
 }
 
 export class Proffesor extends User{
@@ -29,10 +33,6 @@ export class Proffesor extends User{
         this.contactTime = contactTime;
         this.degree = degree;
         this.experience = experience;
-    }
-
-    getFullName(){
-        return this.firstname + " " + this.lastname;
     }
 }
 export class Student extends User{
@@ -44,8 +44,9 @@ export class Student extends User{
 }
 
 export class Contratacion{
-    constructor(course, status="solicitada"){
+    constructor(course, student, status="solicitada"){
         this.status = status;
-        this.course = course;   
+        this.course = course;
+        this.student = student;   
     }
 }

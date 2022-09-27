@@ -15,6 +15,7 @@ import { Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import AppLogo from "./appLogo";
 
+
 class Page {
   constructor(link, name) {
     this.link = link;
@@ -28,7 +29,10 @@ const pages = [
   new Page("/contrataciones", "Contrataciones"),
 ];
 
-const settings = [new Page("/perfil", "Perfil"), new Page("/login", "Logout")];
+const settings = [
+  new Page("/perfil", "Perfil"),
+  new Page("/login", "Logout")
+];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -86,6 +90,7 @@ const ResponsiveAppBar = () => {
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
                   to={page.link}
+                  key={page.link}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
@@ -107,6 +112,7 @@ const ResponsiveAppBar = () => {
           >
             {pages.map((page) => (
               <Button
+                key={page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -158,6 +164,7 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <Link
+                  key={setting.link}
                   style={{ textDecoration: "none", color: "black" }}
                   to={setting.link}
                 >

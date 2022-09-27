@@ -44,31 +44,31 @@ function Contrataciones(props) {
   );
 
   return (
-      <Box>
-        <ResponsiveAppBar />
-        <Container maxWidth="md">
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Solicitada
-  )} />
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Aceptada
-  )} />
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Finalizada
-  )} />
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Cancelada
-  )} />
-        </Container>
-      </Box>
+    <Box>
+      <ResponsiveAppBar />
+      <Container maxWidth="md">
+        <CardContratacion
+          contratacion={
+            new Contratacion(defaultCourse, defaultStudent, Status.Solicitada)
+          }
+        />
+        <CardContratacion
+          contratacion={
+            new Contratacion(defaultCourse, defaultStudent, Status.Aceptada)
+          }
+        />
+        <CardContratacion
+          contratacion={
+            new Contratacion(defaultCourse, defaultStudent, Status.Finalizada)
+          }
+        />
+        <CardContratacion
+          contratacion={
+            new Contratacion(defaultCourse, defaultStudent, Status.Cancelada)
+          }
+        />
+      </Container>
+    </Box>
   );
 }
 

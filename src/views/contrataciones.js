@@ -6,6 +6,7 @@ import {
   Proffesor,
   Contratacion,
   Student,
+  Status,
 } from "../components/cursos/entities";
 
 function Contrataciones(props) {
@@ -38,23 +39,34 @@ function Contrataciones(props) {
     "20-02-1989",
     "12345678",
     "Ingeniero en Sistemas",
-    "12:00 a 18:00"
-  );
-
-  const defaultContratacion = new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    "aceptada"
+    "12:00 a 18:00",
+    "Tengo un examen y estoy corto de tiempo"
   );
 
   return (
       <Box>
         <ResponsiveAppBar />
         <Container maxWidth="md">
-          <CardContratacion contratacion={defaultContratacion} />
-          <CardContratacion contratacion={defaultContratacion} />
-          <CardContratacion contratacion={defaultContratacion} />
-          <CardContratacion contratacion={defaultContratacion} />
+          <CardContratacion contratacion={new Contratacion(
+    defaultCourse,
+    defaultStudent,
+    Status.Solicitada
+  )} />
+          <CardContratacion contratacion={new Contratacion(
+    defaultCourse,
+    defaultStudent,
+    Status.Aceptada
+  )} />
+          <CardContratacion contratacion={new Contratacion(
+    defaultCourse,
+    defaultStudent,
+    Status.Finalizada
+  )} />
+          <CardContratacion contratacion={new Contratacion(
+    defaultCourse,
+    defaultStudent,
+    Status.Cancelada
+  )} />
         </Container>
       </Box>
   );

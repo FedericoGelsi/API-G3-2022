@@ -8,7 +8,7 @@ import CardStatusBadge from "./CardStatusBadge";
 import { Backdrop, Button, CardContent, Divider, Stack } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import { Mail } from "@mui/icons-material";
-import { Course } from "../cursos/entities";
+import { Course, Status } from "../cursos/entities";
 import CardContact from "./CardContact";
 
 CardContratacion.propTypes = {
@@ -25,17 +25,17 @@ function CardContratacion(props) {
   };
 
   const handleDisabled = () => {
-    return props.contratacion.status === "solicitada" ||
-      props.contratacion.status === "cancelada"
+    return props.contratacion.status === Status.Solicitada ||
+      props.contratacion.status === Status.Cancelada
       ? true
       : false;
   };
 
   const handleCancelButton = () => {
-    if (props.contratacion.status === "solicitada") {
+    if (props.contratacion.status === Status.Solicitada) {
       return "CANCELAR";
     }
-    if (props.contratacion.status === "aceptada") {
+    if (props.contratacion.status === Status.Aceptada) {
       return "FINALIZAR";
     }
   };
@@ -114,9 +114,8 @@ function CardContratacion(props) {
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={open}
-            onClick={handleClose}
           >
-            <CardContact user={props.contratacion.student} />
+            <CardContact user={props.contratacion.student} onClick={handleClose} />
           </Backdrop>
         </CardActions>
       </Stack>

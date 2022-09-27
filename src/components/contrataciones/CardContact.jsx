@@ -1,5 +1,5 @@
-import { Mail, Phone, Schedule } from "@mui/icons-material";
-import { Card, CardContent, Typography, Link } from "@mui/material";
+import { Close, Comment, Mail, Phone, Schedule } from "@mui/icons-material";
+import { Card, CardContent, Typography, Link, Button, IconButton } from "@mui/material";
 import { Stack } from "@mui/system";
 
 function CardContact(props) {
@@ -8,9 +8,15 @@ function CardContact(props) {
   return (
     <Card sx={{ maxWidth: "90%" }}>
       <CardContent>
-        <Typography variant="h5" color="text.primary" gutterBottom>
-          Datos de contacto
-        </Typography>
+        <Stack direction="row" spacing={1} justifyContent="space-between">
+          <Typography variant="h5" color="text.primary" gutterBottom>
+            Datos de contacto
+          </Typography>
+          <IconButton onClick={props.onClick}>
+            <Close color="secondary"/>
+          </IconButton>
+        </Stack>
+
         <Stack direction="row" spacing={1}>
           <Schedule color="secondary" />
           <Typography variant="subtitle1" color="text.secondary" flexGrow={1}>
@@ -41,6 +47,13 @@ function CardContact(props) {
           <Link underline="hover" href="tel:4849-4049" color="secondary">
             {user.phone}
           </Link>
+        </Stack>
+        <Stack direction="row" spacing={1} flexWrap="nowrap">
+          <Comment color="secondary" />
+          <Typography variant="subtitle1" color="text.secondary" flexGrow={1}>
+            Motivo:
+          </Typography>
+          <Typography color="secondary">{user.requestDescription}</Typography>
         </Stack>
       </CardContent>
     </Card>

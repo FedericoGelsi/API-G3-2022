@@ -1,8 +1,8 @@
 import { Grid, Typography } from "@mui/material";
-import { Course, Proffesor } from "../components/cursos/entities";
-import CardCurso from "../components/cursos/courseCard";
+import { Class, Proffesor } from "../components/clases/entities";
+import CardClase from "../components/clases/classCard";
 import GridPage from "../components/GridPage";
-import SearchFilter from "../components/cursos/SearchFilter";
+import SearchFilter from "../components/clases/SearchFilter";
 import { Stack } from "@mui/system";
 
 function Inicio(props) {
@@ -18,7 +18,7 @@ function Inicio(props) {
     "30 anios de experiencia en desarrollo FullStack"
   );
 
-  const defaultCourse = new Course(
+  const defaultClase = new Class(
     "Clase React",
     "React",
     "2 semanas",
@@ -49,7 +49,7 @@ function Inicio(props) {
             >
               {Array.from(Array(6)).map((_, index) => (
                 <Grid item xs={2} sm={4} md={4} key={index}>
-                  <CardCurso variant="home" course={defaultCourse} />
+                  <CardClase variant="home" clase={defaultClase} />
                 </Grid>
               ))}
             </Grid>

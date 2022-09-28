@@ -8,11 +8,11 @@ import CardStatusBadge from "./CardStatusBadge";
 import { Backdrop, Button, CardContent, Divider, Stack } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import { Mail } from "@mui/icons-material";
-import { Course, Status } from "../cursos/entities";
+import { Class, Status } from "../clases/entities";
 import CardContact from "./CardContact";
 
 CardContratacion.propTypes = {
-  course: PropTypes.instanceOf(Course),
+  course: PropTypes.instanceOf(Class),
 };
 
 function CardContratacion(props) {

@@ -5,7 +5,7 @@ import { theme } from "./components/theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./views/login.js";
 import Inicio from "./views/inicio";
-import MisCursos from "./views/mis-cursos";
+import MisClases from "./views/mis-clases";
 import Contrataciones from "./views/contrataciones";
 import Notificaciones from "./views/notificaciones";
 import Perfil from "./views/perfil";
@@ -15,6 +15,7 @@ import RegistroProf from "./views/registroProf";
 import Recupero from "./views/recupero";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import Olvido from "./views/olvido";
+import Clase from "./views/curso";
 
 function App() {
   return (
@@ -24,11 +25,13 @@ function App() {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route path="/" element={<Inicio />} />
-            <Route path="mis-cursos" element={<MisCursos />} />
+            <Route path="clases/:claseId" element={<Clase />} />
+            <Route path="clases/new" element={<Clase />} />
+            <Route path="mis-clases" element={<MisClases />} />
+            <Route path="mis-clases/:claseId" element={<Clase />} />
             <Route path="contrataciones" element={<Contrataciones />} />
             <Route path="notificaciones" element={<Notificaciones />} />
             <Route path="perfil" element={<Perfil />} />
-            
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="registro" element={<Registro />} />

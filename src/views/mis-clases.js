@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
-import CardCurso from "../components/cursos/courseCard";
-import { Course, Proffesor } from "../components/cursos/entities";
+import CardClase from "../components/clases/classCard";
+import { Class, Proffesor } from "../components/clases/entities";
 import GridPage from "../components/GridPage";
 
-function MisCursos(props) {
+function MisClases(props) {
   const defaultUser = new Proffesor(
     "Juan",
     "Perez",
@@ -16,7 +16,7 @@ function MisCursos(props) {
     "30 anios de experiencia en desarrollo FullStack"
   );
 
-  const defaultCourse = new Course(
+  const defaultClase = new Class(
     "Clase React",
     "React",
     "2 semanas",
@@ -35,7 +35,7 @@ function MisCursos(props) {
       >
         {Array.from(Array(12)).map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <CardCurso course={defaultCourse} />
+            <CardClase clase={defaultClase} />
           </Grid>
         ))}
       </Grid>
@@ -43,4 +43,4 @@ function MisCursos(props) {
   );
 }
 
-export default MisCursos;
+export default MisClases;

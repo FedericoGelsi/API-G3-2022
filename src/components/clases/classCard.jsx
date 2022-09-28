@@ -7,10 +7,10 @@ import { Chip, Fab } from "@mui/material";
 import { Stack } from "@mui/system";
 import { ShoppingCart } from "@mui/icons-material";
 
-export default function CardCurso(props) {
-  const course = props.course;
+export default function CardClase(props) {
+  const clase = props.clase;
 
-  let cardImageUrl = "/img/" + (course.image ? course.image : "default.png");
+  let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
 
   return (
     <Card>
@@ -24,17 +24,17 @@ export default function CardCurso(props) {
         />
         <CardContent>
           <Typography variant="subtitle2" color="secondary">
-            Profesor - {course.professor.getFullName()}
+            Profesor - {clase.professor.getFullName()}
           </Typography>
           <Typography variant="h4" color="text.primary">
-            {course.name}
+            {clase.name}
           </Typography>
           <Typography variant="body1" color="text.secondary" noWrap>
-            {course.description}
+            {clase.description}
           </Typography>
         </CardContent>
         <Stack direction="row" justifyContent="space-between" p={1}>
-          <Chip label={course.subject} variant="outlined" color="primary" />
+          <Chip label={clase.subject} variant="outlined" color="primary" />
           {props.variant === "home" && (
             <Fab color="secondary" size="small" variant="extended">
               <Typography variant="button">Contratar</Typography>

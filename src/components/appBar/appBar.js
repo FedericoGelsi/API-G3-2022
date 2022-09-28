@@ -25,7 +25,7 @@ class Page {
 
 const pages = [
   new Page("/", "Inicio"),
-  new Page("/mis-cursos", "Mis Cursos"),
+  new Page("/mis-clases", "Mis Clases"),
   new Page("/contrataciones", "Contrataciones"),
 ];
 

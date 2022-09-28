@@ -1,12 +1,12 @@
 import CardContratacion from "../components/contrataciones/CardContratacion";
 import { Grid } from "@mui/material";
 import {
-  Course,
+  Class,
   Proffesor,
   Contratacion,
   Student,
   Status,
-} from "../components/cursos/entities";
+} from "../components/clases/entities";
 import GridPage from "../components/GridPage";
 
 function Contrataciones(props) {
@@ -22,7 +22,7 @@ function Contrataciones(props) {
     "30 anios de experiencia en desarrollo FullStack"
   );
 
-  const defaultCourse = new Course(
+  const defaultCourse = new Class(
     "Clase React",
     "React",
     "2 semanas",

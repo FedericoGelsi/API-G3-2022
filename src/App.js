@@ -14,7 +14,7 @@ import RegistroAlum from "./views/registroAlum";
 import RegistroProf from "./views/registroProf";
 import Recupero from "./views/recupero";
 import { PrivateRoutes } from "./components/PrivateRoutes";
-import Olvido from "./views/olvido"
+import Olvido from "./views/olvido";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
           <Route path="registroProf" element={<RegistroProf />} />
           <Route path="recupero" element={<Recupero />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
-          <Route path="olvido" element={<Olvido/>}/>
+          <Route path="olvido" element={<Olvido />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

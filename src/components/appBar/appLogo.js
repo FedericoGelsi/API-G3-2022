@@ -1,10 +1,11 @@
 import { Box } from "@mui/system";
 import { MenuBook } from "@mui/icons-material";
+import Logo from "../../assets/icon_logoWhite.png";
 import Typography from "@mui/material/Typography";
+import { Stack } from "@mui/material";
 
 function AppLogo(props) {
-
-  function getTextVariant(){
+  function getTextVariant() {
     const TextMd = {
       mr: 2,
       display: { xs: "none", md: "flex" },
@@ -24,7 +25,7 @@ function AppLogo(props) {
     return props.variant === "xs" ? TextXs : TextMd;
   }
 
-  function getLogoVariant(){
+  function getLogoVariant() {
     const LogoXs = {
       display: { xs: "flex", md: "none" },
       mr: 1,
@@ -37,29 +38,22 @@ function AppLogo(props) {
       fontWeight: 500,
       color: "inherit",
       textDecoration: "none",
+      height: 32,
+      width: 32,
     };
     return props.variant === "xs" ? LogoXs : LogoMd;
   }
 
   return (
-    <Box sx={{flexGrow: {xs:"1", md:"0"}, display: "flex" }}>
-      <MenuBook
-        sx={getLogoVariant()}
-      />
-      <Typography
-        variant="h6"
-        noWrap
-        component="a"
-        sx={getTextVariant()}
-      >
+    <Stack direction="row" spacing={1} flexGrow={{xs:1, md:0}}>
+      <Box sx={getLogoVariant()}>
+        <img src={Logo} />
+      </Box>
+      <Typography variant="h6" noWrap component="a" sx={getTextVariant()}>
         FOR EDUCATION
       </Typography>
-    </Box>
+    </Stack>
   );
 }
 
 export default AppLogo;
-
-function getFlexProperties(){
-    
-}

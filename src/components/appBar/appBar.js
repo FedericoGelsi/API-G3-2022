@@ -54,7 +54,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ mb: 5 }}>
+    <AppBar position="sticky">
       <Container>
         <Toolbar>
           {/* XS Components */}

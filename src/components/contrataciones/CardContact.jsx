@@ -1,5 +1,5 @@
 import { Close, Comment, Mail, Phone, Schedule } from "@mui/icons-material";
-import { Card, CardContent, Typography, Link, Button, IconButton } from "@mui/material";
+import { Card, CardContent, Typography, Link, IconButton } from "@mui/material";
 import { Stack } from "@mui/system";
 
 function CardContact(props) {

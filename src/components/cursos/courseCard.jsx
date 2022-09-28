@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Chip, Fab } from "@mui/material";
 import { Stack } from "@mui/system";
-import { ArrowRight, ShoppingCart } from "@mui/icons-material";
+import { ShoppingCart } from "@mui/icons-material";
 
 export default function CardCurso(props) {
   const course = props.course;
@@ -13,7 +13,7 @@ export default function CardCurso(props) {
   let cardImageUrl = "/img/" + (course.image ? course.image : "default.png");
 
   return (
-    <Card sx={{ maxWidth: { md: "35%", xs: "auto" } }}>
+    <Card>
       <Stack direction="column">
         <CardMedia
           component="img"

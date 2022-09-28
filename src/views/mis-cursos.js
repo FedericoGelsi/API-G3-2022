@@ -1,7 +1,7 @@
-import { Box, Container } from "@mui/material";
-import ResponsiveAppBar from "../components/appBar/appBar";
+import { Grid } from "@mui/material";
 import CardCurso from "../components/cursos/courseCard";
 import { Course, Proffesor } from "../components/cursos/entities";
+import GridPage from "../components/GridPage";
 
 function MisCursos(props) {
   const defaultUser = new Proffesor(
@@ -26,12 +26,20 @@ function MisCursos(props) {
   );
 
   return (
-    <Box>
-      <ResponsiveAppBar />
-      <Container maxWidth="md">
-        <CardCurso course={defaultCourse} />
-      </Container>
-    </Box>
+    <GridPage>
+      <Grid
+        container
+        direction="row"
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 2, sm: 8, md: 12 }}
+      >
+        {Array.from(Array(12)).map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <CardCurso course={defaultCourse} />
+          </Grid>
+        ))}
+      </Grid>
+    </GridPage>
   );
 }
 

@@ -1,12 +1,10 @@
-import { Box, Container } from "@mui/material";
-import ResponsiveAppBar from "../components/appBar/appBar";
+import GridPage from "../components/GridPage";
 
 function Perfil(props) {
   return (
-    <Box>
-      <ResponsiveAppBar />
-      <Container></Container>
-    </Box>
+    <GridPage>
+      <h1>Perfil</h1>
+    </GridPage>
   );
 }
 

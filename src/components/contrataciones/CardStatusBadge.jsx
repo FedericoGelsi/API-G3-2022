@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Chip, Stack, Typography } from "@mui/material";
+import { Chip, Stack, Typography } from "@mui/material";
 
 
 function CardStatusBadge(props) {

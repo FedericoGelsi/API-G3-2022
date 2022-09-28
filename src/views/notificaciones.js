@@ -1,13 +1,9 @@
-import { Box, Container } from "@mui/material";
-import ResponsiveAppBar from "../components/appBar/appBar";
+import GridPage from "../components/GridPage";
 
 function Notificaciones(props) {
-    return ( <Box>
-        <ResponsiveAppBar/>
-        <Container>
-            <h1>Notificaciones</h1>
-        </Container>
-    </Box> );
+    return ( <GridPage>
+        <h1>Notificaciones</h1>
+    </GridPage> );
 }
 
 export default Notificaciones;

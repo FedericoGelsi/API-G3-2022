@@ -1,6 +1,5 @@
-import { Box, Container } from "@mui/material";
-import ResponsiveAppBar from "../components/appBar/appBar";
 import CardContratacion from "../components/contrataciones/CardContratacion";
+import { Grid } from "@mui/material";
 import {
   Course,
   Proffesor,
@@ -8,6 +7,7 @@ import {
   Student,
   Status,
 } from "../components/cursos/entities";
+import GridPage from "../components/GridPage";
 
 function Contrataciones(props) {
   const defaultUser = new Proffesor(
@@ -43,32 +43,31 @@ function Contrataciones(props) {
     "Tengo un examen y estoy corto de tiempo"
   );
 
+  const statusIndex = [
+    Status.Solicitada,
+    Status.Aceptada,
+    Status.Cancelada,
+    Status.Finalizada,
+  ];
+
   return (
-      <Box>
-        <ResponsiveAppBar />
-        <Container maxWidth="md">
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Solicitada
-  )} />
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Aceptada
-  )} />
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Finalizada
-  )} />
-          <CardContratacion contratacion={new Contratacion(
-    defaultCourse,
-    defaultStudent,
-    Status.Cancelada
-  )} />
-        </Container>
-      </Box>
+    <GridPage>
+      <Grid container direction="column" spacing={{ xs: 2, md: 2 }}>
+        {Array.from(Array(4)).map((_, index) => (
+          <Grid item key={index}>
+            <CardContratacion
+              contratacion={
+                new Contratacion(
+                  defaultCourse,
+                  defaultStudent,
+                  statusIndex[index]
+                )
+              }
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </GridPage>
   );
 }
 

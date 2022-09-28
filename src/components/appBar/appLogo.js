@@ -1,5 +1,4 @@
 import { Box } from "@mui/system";
-import { MenuBook } from "@mui/icons-material";
 import Logo from "../../assets/icon_logoWhite.png";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
@@ -47,7 +46,7 @@ function AppLogo(props) {
   return (
     <Stack direction="row" spacing={1} flexGrow={{xs:1, md:0}}>
       <Box sx={getLogoVariant()}>
-        <img src={Logo} />
+        <img src={Logo} alt="for-education-logo"/>
       </Box>
       <Typography variant="h6" noWrap component="a" sx={getTextVariant()}>
         FOR EDUCATION

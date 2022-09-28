@@ -51,7 +51,6 @@ function CardContratacion(props) {
         justifyContent: "space-between",
         alignItems: { xs: "center", md: "stretch" },
         maxHeight: { md: 256 },
-        my: 2,
         p: 2,
         pb: 1,
       }}

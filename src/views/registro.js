@@ -2,8 +2,8 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
+import RegistroFormProf from "../components/login/registroProfForm";
 import RegistroFormAlum from "../components/login/registroAlumForm";
-import FechaNacimiento from "../components/login/bornDate";
 import Logo from "../components/login/loginLogo";
 import { motion } from "framer-motion";
 
@@ -46,12 +46,7 @@ const fadeInUp = {
   },
 };
 
-
-
-
-
-
-const RegistroAlum = ({ setAuth }) => {
+const Registro = ({ setAuth }) => {
     return (
       <RootStyle>
         <Container maxWidth="sm">
@@ -64,8 +59,13 @@ const RegistroAlum = ({ setAuth }) => {
                   </Typography>
               </Divider>
             </HeadingStyle>
-            <RegistroFormAlum setAuth={setAuth} />
-            <FechaNacimiento/>
+
+            
+              context.createuser.role==="professor" ? <RegistroFormProf setAuth={setAuth} /> :
+                <RegistroFormAlum setAuth={setAuth} />;
+              
+            
+  
             <Typography
               component={motion.p}
               {...fadeInUp}
@@ -102,4 +102,4 @@ const RegistroAlum = ({ setAuth }) => {
     );
   };
   
-export default RegistroAlum
+export default Registro

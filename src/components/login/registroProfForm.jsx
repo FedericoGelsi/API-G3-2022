@@ -13,6 +13,11 @@ import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
+import { Dayjs } from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 /////////////////////////////////////////////////////////////
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -111,6 +116,39 @@ const RegistroFormProf = ({ setAuth }) => {
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
+            />
+            <TextField
+              fullWidth
+              type="tel"
+              label="Telefono"
+              {...getFieldProps("telefono")}
+              error={Boolean(touched.telefono && errors.telefono)}
+              helperText={touched.telefono && errors.telefono}
+            />
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                fullWidth
+                label="Fecha de Nacimiento"
+                openTo="year"
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+
+            <TextField
+              fullWidth
+              label="Titulo"
+              {...getFieldProps("titulo")}
+              error={Boolean(touched.titulo && errors.titulo)}
+              helperText={touched.titulo && errors.titulo}
+            />
+
+            <TextField
+              fullWidth
+              label="Experiencia"
+              {...getFieldProps("experiencia")}
+              error={Boolean(touched.experiencia && errors.experiencia)}
+              helperText={touched.experiencia && errors.experiencia}
             />
 
             <TextField

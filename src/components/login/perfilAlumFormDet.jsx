@@ -18,8 +18,8 @@ export const PerfilDetalleAlum = (props) => {
     email: 'demo@profesor.com',
     telefono: '',
     bornDate:'11/03/1980',
-    titulo: 'Ing Quimico',
-    experiencia: '2 anios en la UBA'
+    estudios: 'Ing Quimico',
+    
 
   });
 
@@ -130,29 +130,15 @@ export const PerfilDetalleAlum = (props) => {
             >
               <TextField
                 fullWidth
-                label="Titulo"
-                name="titulo"
+                label="Estudios"
+                name="estudios"
                 onChange={handleChange}
                 required
-                value={values.titulo}
+                value={values.estudios}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Experiencia"
-                name="experiencia"
-                onChange={handleChange}
-                required
-                value={values.experiencia}
-                variant="outlined"
-              />
-            </Grid>
+            
           </Grid>
         </CardContent>
         <Divider />

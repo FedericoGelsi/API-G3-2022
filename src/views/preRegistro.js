@@ -45,7 +45,7 @@ const fadeInUp = {
 };
 
 
-const Registro = ({ setAuth }) => {
+const PreRegistro = ({ setAuth }) => {
   return (
     <RootStyle>
       <Container maxWidth="sm">
@@ -82,7 +82,7 @@ const Registro = ({ setAuth }) => {
   );
 };
 
-export default Registro;
+export default PreRegistro;
 
 
 

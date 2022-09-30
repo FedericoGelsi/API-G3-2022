@@ -16,6 +16,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { useContext } from "react";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -55,14 +56,21 @@ const LoginForm = ({ setAuth }) => {
       console.log("submitting...");
       setTimeout(() => {
         console.log("submited!!");
-        setAuth(true);
-        navigate(from, { replace: true });
+        //setAuth(true);
+        console.log(values.email);
+        if(values.email.includes("@alumno")){
+          navigate("/")
+        };
+        values.email.includes("@alumno") && navigate("/", { replace: true });
+      
       }, 2000);
     },
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
+
+  // const {setUser}=useContext(UserContext)
 
   return (
     <FormikProvider value={formik}>

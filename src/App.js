@@ -9,12 +9,12 @@ import MisCursos from "./views/mis-cursos";
 import Contrataciones from "./views/contrataciones";
 import Notificaciones from "./views/notificaciones";
 import Perfil from "./views/perfil";
-import Registro from "./views/preRegistro";
-import RegistroAlum from "./views/registroAlum";
-import RegistroProf from "./views/registroProf";
+import PreRegistro from "./views/preRegistro";
+import Registro from "./views/registro";
 import Recupero from "./views/recupero";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import Olvido from "./views/olvido";
+import RegistroClase from "./views/registroClase";
 
 function App() {
   return (
@@ -28,12 +28,12 @@ function App() {
             <Route path="contrataciones" element={<Contrataciones />} />
             <Route path="notificaciones" element={<Notificaciones />} />
             <Route path="perfil" element={<Perfil />} />
+            <Route path="registroClase" element={<RegistroClase />}/>
             
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="registro" element={<Registro />} />
-          <Route path="registroAlum" element={<RegistroAlum />} />
-          <Route path="registroProf" element={<RegistroProf />} />
+          <Route path="preRegistro" element={<PreRegistro />} />
           <Route path="recupero" element={<Recupero />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="olvido" element={<Olvido />} />

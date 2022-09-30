@@ -1,5 +1,6 @@
 export class Class {
   constructor(
+    id,
     name,
     subject,
     courseLength,
@@ -7,8 +8,10 @@ export class Class {
     frec,
     price,
     type = "individual",
-    image = undefined
+    image = undefined,
+    description = "Sin descripcion"
   ) {
+    this.id = id;
     this.name = name;
     this.subject = subject;
     this.professor = professor;
@@ -17,7 +20,23 @@ export class Class {
     this.frec = frec;
     this.courseLength = courseLength;
     this.price = price;
+    this.description = description;
   }
+}
+
+export function createClassFromDto(classDto, professor) {
+  return new Class(
+    classDto.id,
+    classDto.name,
+    classDto.subject,
+    professor,
+    classDto.image,
+    classDto.type,
+    classDto.frec,
+    classDto.courseLength,
+    classDto.price,
+    classDto.description
+  );
 }
 
 export class User {
@@ -35,7 +54,13 @@ export class User {
   }
 }
 
-export class Proffesor extends User {
+class Experience {
+  constructor(title, description) {
+    this.title = title;
+    this.description = description;
+  }
+}
+export class Professor extends User {
   constructor(
     firstname,
     lastname,
@@ -53,6 +78,8 @@ export class Proffesor extends User {
     this.experience = experience;
   }
 }
+
+
 export class Student extends User {
   constructor(
     firstname,
@@ -73,20 +100,37 @@ export class Student extends User {
 }
 
 export var Status = {
-    Solicitada: "solicitada",
-    Aceptada: "aceptada",
-    Finalizada: "finalizada",
-    Cancelada: "cancelada",
-  };
+  Solicitada: "solicitada",
+  Aceptada: "aceptada",
+  Finalizada: "finalizada",
+  Cancelada: "cancelada",
+};
 export class Contratacion {
-  
-  constructor(course, student, status = Status.Solicitada) {
+  constructor(clase, student, status = Status.Solicitada) {
     this.status = status;
-    this.course = course;
+    this.clase = clase;
     this.student = student;
   }
 
   setStatus(status) {
     this.status = status;
   }
+}
+
+
+
+export function createProfesorFromDto(proffesorDto) {
+  return new Professor(
+    proffesorDto.firstname,
+    proffesorDto.lastname,
+    proffesorDto.mail,
+    proffesorDto.phone,
+    proffesorDto.birthdate,
+    proffesorDto.password,
+    proffesorDto.contactTime,
+    proffesorDto.degree,
+    proffesorDto.experience.map(
+      (exp) => new Experience(exp.title, exp.description)
+    )
+  );
 }

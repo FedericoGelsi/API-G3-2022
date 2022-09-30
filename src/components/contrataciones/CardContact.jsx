@@ -53,7 +53,7 @@ function CardContact(props) {
           <Typography variant="subtitle1" color="text.secondary" flexGrow={1}>
             Motivo:
           </Typography>
-          <Typography color="secondary">{user.requestDescription}</Typography>
+          <Typography color="secondary">{props.reason}</Typography>
         </Stack>
       </CardContent>
     </Card>

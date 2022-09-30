@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
-
+import mock from "../../data/mock.json";
+import { UserContext } from "../../contexts/UserContext";
 import {
   Box,
   Checkbox,
@@ -28,10 +29,9 @@ const animate = {
   },
 };
 
-const LoginForm = ({ setAuth }) => {
+const LoginForm = () => {
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,9 +40,23 @@ const LoginForm = ({ setAuth }) => {
       .email("Ingrese un mail valido")
       .required("Es necesario completar este campo"),
     password: Yup.string()
-      .min(8,"Valor muy corto")
+      .min(8, "Valor muy corto")
       .required("Es necesario completar este campo"),
   });
+
+  const getUser = (mail) => {
+    const userLogin = mock.loginUsers.find((user) => user.mail === mail);
+    if (userLogin) {
+      let userProfile = mock.users.find(
+        (userProfile) => userProfile.mail === mail
+      );
+      if (!userProfile) {
+        return undefined;
+      }
+      return userProfile;
+    }
+    return undefined;
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -51,15 +65,23 @@ const LoginForm = ({ setAuth }) => {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      console.log("submitting...");
+    onSubmit: (values, actions) => {
       setTimeout(() => {
-        console.log("submited!!");
-        setAuth(true);
-        navigate(from, { replace: true });
+        handleLogin(values);
+        actions.setSubmitting(false);
       }, 2000);
     },
   });
+
+  const handleLogin = (values) => {
+    const user = getUser(values.email);
+    if (user && user.password === values.password) {
+      setUser(user);
+      navigate(user.role === "professor" ? "/mis-clases" : "/clases");
+    } else {
+      alert("Usuario o Contrasenia inconrrecta.");
+    }
+  };
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
@@ -142,8 +164,12 @@ const LoginForm = ({ setAuth }) => {
                 label="Recuerdame"
               />
 
-              <Link component={RouterLink} variant="subtitle2" to="/olvido" underline="hover" >
-              
+              <Link
+                component={RouterLink}
+                variant="subtitle2"
+                to="/olvido"
+                underline="hover"
+              >
                 Olvido su contraseña?
               </Link>
             </Stack>

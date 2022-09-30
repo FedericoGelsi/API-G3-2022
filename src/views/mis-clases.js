@@ -1,41 +1,50 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import CardClase from "../components/clases/classCard";
-import { Class, Proffesor } from "../components/clases/entities";
 import GridPage from "../components/GridPage";
+import mock from "../data/mock.json";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function MisClases(props) {
-  const defaultUser = new Proffesor(
-    "Juan",
-    "Perez",
-    "juan.perez@profesor.com",
-    "1122540953",
-    "20-02-1989",
-    "12345678",
-    "12:00 a 18:00",
-    "Ingeniero en Sistemas",
-    "30 anios de experiencia en desarrollo FullStack"
-  );
+  const userContext = useContext(UserContext);
 
-  const defaultClase = new Class(
-    "Clase React",
-    "React",
-    "2 semanas",
-    defaultUser,
-    "2 dias por semana",
-    "25 USD"
-  );
+  const getStudentContracts = () => {
+    return mock.contracts.filter((_) => {
+      return _.student.id === userContext.user.id;
+    });
+  };
+
+  const getProfessorContracts = () => {
+    return mock.contracts.filter((_) => {
+      return _.class.professor.id === userContext.user.id;
+    });
+  };
+
+  const getMyClasses = () => {
+    return userContext.user.role === "student"
+      ? getStudentContracts()
+      : getProfessorContracts();
+  };
+
+  const classes = getMyClasses();
 
   return (
     <GridPage>
+      <Grid item>
+        <Typography variant="h4" >Mis Clases</Typography>
+      </Grid>
+      <Grid item>
+        <Typography variant="h4" >Mis Clases</Typography>
+      </Grid>
       <Grid
         container
         direction="row"
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 2, sm: 8, md: 12 }}
       >
-        {Array.from(Array(12)).map((_, index) => (
+        {classes.map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <CardClase clase={defaultClase} />
+            <CardClase clase={_.class} />
           </Grid>
         ))}
       </Grid>

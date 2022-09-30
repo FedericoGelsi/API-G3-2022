@@ -1,0 +1,343 @@
+{
+  "loginUsers": [
+    {
+      "mail": "profe@mail.com",
+      "name": "Profesor 1",
+      "role": "professor"
+    },
+    {
+      "mail": "alumno@mail.com",
+      "name": "Alumno 1",
+      "role": "student"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "role": "professor",
+      "firstname": "Jhon",
+      "lastname": "Doe",
+      "mail": "profe@mail.com",
+      "phone": "1133445566",
+      "birthdate": "04/05/1989",
+      "password": "soyprofesor",
+      "contactTime": "12:00 - 18:00",
+      "degree": "Ingeniero de Software",
+      "experience": [
+        {
+          "title": "Experiencia 1",
+          "description": "Descripcion exp 1"
+        },
+        {
+          "title": "Experiencia 2",
+          "description": "Descripcion exp 2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "role": "student",
+      "firstname": "Jane",
+      "lastname": "Doe",
+      "mail": "alumno@mail.com",
+      "phone": "1133445599",
+      "birthdate": "04/05/2002",
+      "password": "soyalumno",
+      "contactTime": "12:00 - 18:00",
+      "degrees": [
+        {
+          "title": "Secundario basico",
+          "status": "Finalizado"
+        },
+        {
+          "title": "Tecnicatura en Desarrollo de Software",
+          "status": "En curso"
+        }
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "Clase 1",
+      "subject": "React",
+      "courselength": "3 meses",
+      "professor": {
+        "id": 1,
+        "firstname": "Jhon",
+        "lastname": "Doe",
+        "mail": "profe@mail.com",
+        "phone": "1133445566",
+        "contactTime": "12:00 - 18:00",
+        "degree": "Ingeniero de Software",
+        "experience": [
+          {
+            "title": "Experiencia 1",
+            "description": "Descripcion exp 1"
+          },
+          {
+            "title": "Experiencia 2",
+            "description": "Descripcion exp 2"
+          }
+        ]
+      },
+      "frec": "Semanal",
+      "price": "20 USD",
+      "type": "individual",
+      "image": "",
+      "description": "Sin descripcion"
+    },
+    {
+      "id": 2,
+      "name": "Clase 2",
+      "subject": "React",
+      "courselength": "3 meses",
+      "professor": {
+        "id": 1,
+        "firstname": "Jhon",
+        "lastname": "Doe",
+        "mail": "profe@mail.com",
+        "phone": "1133445566",
+        "contactTime": "12:00 - 18:00",
+        "degree": "Ingeniero de Software",
+        "experience": [
+          {
+            "title": "Experiencia 1",
+            "description": "Descripcion exp 1"
+          },
+          {
+            "title": "Experiencia 2",
+            "description": "Descripcion exp 2"
+          }
+        ]
+      },
+      "frec": "Semanal",
+      "price": "20 USD",
+      "type": "individual",
+      "image": "",
+      "description": "Sin descripcion"
+    }
+  ],
+  "contracts": [
+    {
+      "class": {
+        "id": 1,
+        "name": "Clase 1",
+        "subject": "React",
+        "courselength": "3 meses",
+        "professor": {
+          "id": 2,
+          "firstname": "Jhon",
+          "lastname": "Doe",
+          "mail": "profe@mail.com",
+          "phone": "1133445566",
+          "contactTime": "12:00 - 18:00",
+          "degree": "Ingeniero de Software",
+          "experience": [
+            {
+              "title": "Experiencia 1",
+              "description": "Descripcion exp 1"
+            },
+            {
+              "title": "Experiencia 2",
+              "description": "Descripcion exp 2"
+            }
+          ]
+        },
+        "frec": "Semanal",
+        "price": "20 USD",
+        "type": "individual",
+        "image": "",
+        "description": "Sin descripcion"
+      },
+      "student": {
+        "id": 2,
+        "role": "student",
+        "firstname": "Jane",
+        "lastname": "Doe",
+        "mail": "alumno@mail.com",
+        "phone": "1133445599",
+        "birthdate": "04/05/2002",
+        "password": "soyalumno",
+        "contactTime": "12:00 - 18:00",
+        "degrees": [
+          {
+            "title": "Secundario basico",
+            "status": "Finalizado"
+          },
+          {
+            "title": "Tecnicatura en Desarrollo de Software",
+            "status": "En curso"
+          }
+        ]
+      },
+      "status": "solicitada",
+      "reason": "Motivo X"
+    },
+    {
+      "class": {
+        "id": 1,
+        "name": "Clase 1",
+        "subject": "React",
+        "courselength": "3 meses",
+        "professor": {
+          "id": 1,
+          "firstname": "Jhon",
+          "lastname": "Doe",
+          "mail": "profe@mail.com",
+          "phone": "1133445566",
+          "contactTime": "12:00 - 18:00",
+          "degree": "Ingeniero de Software",
+          "experience": [
+            {
+              "title": "Experiencia 1",
+              "description": "Descripcion exp 1"
+            },
+            {
+              "title": "Experiencia 2",
+              "description": "Descripcion exp 2"
+            }
+          ]
+        },
+        "frec": "Semanal",
+        "price": "20 USD",
+        "type": "individual",
+        "image": "",
+        "description": "Sin descripcion"
+      },
+      "student": {
+        "id": 2,
+        "role": "student",
+        "firstname": "Jane",
+        "lastname": "Doe",
+        "mail": "alumno@mail.com",
+        "phone": "1133445599",
+        "birthdate": "04/05/2002",
+        "password": "soyalumno",
+        "contactTime": "12:00 - 18:00",
+        "degrees": [
+          {
+            "title": "Secundario basico",
+            "status": "Finalizado"
+          },
+          {
+            "title": "Tecnicatura en Desarrollo de Software",
+            "status": "En curso"
+          }
+        ]
+      },
+      "status": "aceptada",
+      "reason": "Motivo X"
+    },
+    {
+      "class": {
+        "id": 1,
+        "name": "Clase 1",
+        "subject": "React",
+        "courselength": "3 meses",
+        "professor": {
+          "id": 1,
+          "firstname": "Jhon",
+          "lastname": "Doe",
+          "mail": "profe@mail.com",
+          "phone": "1133445566",
+          "contactTime": "12:00 - 18:00",
+          "degree": "Ingeniero de Software",
+          "experience": [
+            {
+              "title": "Experiencia 1",
+              "description": "Descripcion exp 1"
+            },
+            {
+              "title": "Experiencia 2",
+              "description": "Descripcion exp 2"
+            }
+          ]
+        },
+        "frec": "Semanal",
+        "price": "20 USD",
+        "type": "individual",
+        "image": "",
+        "description": "Sin descripcion"
+      },
+      "student": {
+        "id": 2,
+        "role": "student",
+        "firstname": "Jane",
+        "lastname": "Doe",
+        "mail": "alumno@mail.com",
+        "phone": "1133445599",
+        "birthdate": "04/05/2002",
+        "password": "soyalumno",
+        "contactTime": "12:00 - 18:00",
+        "degrees": [
+          {
+            "title": "Secundario basico",
+            "status": "Finalizado"
+          },
+          {
+            "title": "Tecnicatura en Desarrollo de Software",
+            "status": "En curso"
+          }
+        ]
+      },
+      "status": "cancelada",
+      "reason": "Motivo X"
+    },
+    {
+      "class": {
+        "id": 1,
+        "name": "Clase 1",
+        "subject": "React",
+        "courselength": "3 meses",
+        "professor": {
+          "id": 1,
+          "firstname": "Jhon",
+          "lastname": "Doe",
+          "mail": "profe@mail.com",
+          "phone": "1133445566",
+          "contactTime": "12:00 - 18:00",
+          "degree": "Ingeniero de Software",
+          "experience": [
+            {
+              "title": "Experiencia 1",
+              "description": "Descripcion exp 1"
+            },
+            {
+              "title": "Experiencia 2",
+              "description": "Descripcion exp 2"
+            }
+          ]
+        },
+        "frec": "Semanal",
+        "price": "20 USD",
+        "type": "individual",
+        "image": "",
+        "description": "Sin descripcion"
+      },
+      "student": {
+        "id": 2,
+        "role": "student",
+        "firstname": "Jane",
+        "lastname": "Doe",
+        "mail": "alumno@mail.com",
+        "phone": "1133445599",
+        "birthdate": "04/05/2002",
+        "password": "soyalumno",
+        "contactTime": "12:00 - 18:00",
+        "degrees": [
+          {
+            "title": "Secundario basico",
+            "status": "Finalizado"
+          },
+          {
+            "title": "Tecnicatura en Desarrollo de Software",
+            "status": "En curso"
+          }
+        ]
+      },
+      "status": "finalizada",
+      "reason": "Motivo X"
+    }
+  ]
+}

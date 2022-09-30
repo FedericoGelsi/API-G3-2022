@@ -45,20 +45,20 @@ const fadeInUp = {
   },
 };
 
-const Login = ({ setAuth }) => {
+const Login = () => {
   return (
     <RootStyle>
       <Container maxWidth="sm">
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
             <Logo />
-            <Divider sx={{ my:3, mb: 3 }} component={motion.div} {...fadeInUp}>
+            <Divider sx={{ my: 3, mb: 3 }} component={motion.div} {...fadeInUp}>
               <Typography sx={{ color: "text.secondary", mb: 0 }}>
-                Ingrese a su cuenta con:
+                Ingrese a su cuenta:
               </Typography>
             </Divider>
           </HeadingStyle>
-          <LoginForm setAuth={setAuth} />
+          <LoginForm />
 
           <Typography
             component={motion.p}

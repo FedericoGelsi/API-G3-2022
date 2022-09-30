@@ -6,10 +6,18 @@ import Typography from "@mui/material/Typography";
 import { Chip, Fab } from "@mui/material";
 import { Stack } from "@mui/system";
 import { ShoppingCart } from "@mui/icons-material";
+import ClassConfirmationPopUp from "./classConfirmationPopup";
 
 export default function CardClase(props) {
-  const clase = props.clase;
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const clase = props.clase;
   let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
 
   return (
@@ -24,7 +32,8 @@ export default function CardClase(props) {
         />
         <CardContent>
           <Typography variant="subtitle2" color="secondary">
-            Profesor - {clase.professor.getFullName()}
+            Profesor -{" "}
+            {clase.professor.firstname + " " + clase.professor.lastname}
           </Typography>
           <Typography variant="h4" color="text.primary">
             {clase.name}
@@ -36,11 +45,17 @@ export default function CardClase(props) {
         <Stack direction="row" justifyContent="space-between" p={1}>
           <Chip label={clase.subject} variant="outlined" color="primary" />
           {props.variant === "home" && (
-            <Fab color="secondary" size="small" variant="extended">
+            <Fab
+              color="secondary"
+              size="small"
+              variant="extended"
+              onClick={handleClickOpen}
+            >
               <Typography variant="button">Contratar</Typography>
               <ShoppingCart />
             </Fab>
           )}
+          <ClassConfirmationPopUp handleClose={handleClose} open={open} />
         </Stack>
       </Stack>
     </Card>

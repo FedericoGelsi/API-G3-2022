@@ -1,10 +1,11 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Fab } from "@mui/material";
 import CardClase from "../components/clases/classCard";
 import GridPage from "../components/GridPage";
 import mock from "../data/mock.json";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-
+import { Add } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 function MisClases(props) {
   const userContext = useContext(UserContext);
 
@@ -27,15 +28,25 @@ function MisClases(props) {
   };
 
   const classes = getMyClasses();
+  const navigate = useNavigate();
+
+  const handleNewClass = () => {
+    navigate("/clases/new");
+  };
 
   return (
     <GridPage>
       <Grid item>
-        <Typography variant="h4" >Mis Clases</Typography>
+        <Typography variant="h4">Mis Clases</Typography>
       </Grid>
-      <Grid item>
-        <Typography variant="h4" >Mis Clases</Typography>
-      </Grid>
+      {userContext.user.role === "professor" && (
+        <Grid item>
+          <Fab color="secondary" variant="extended" onClick={handleNewClass}>
+            <Add />
+            <Typography variant="button">Crear clase</Typography>
+          </Fab>
+        </Grid>
+      )}
       <Grid
         container
         direction="row"

@@ -14,7 +14,7 @@ function Inicio(props) {
         justifyContent="center"
       >
         <Grid item md={8}>
-          <img width="100%" src="./img/undraw_Online_learning_re_qw08.png" />
+          <img width="100%" alt="hero" src="./img/undraw_Online_learning_re_qw08.png" />
         </Grid>
         <Grid item md={4}>
           <Typography variant="h4" align="center">

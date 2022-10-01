@@ -10,7 +10,7 @@ import Contrataciones from "./views/contrataciones";
 import Notificaciones from "./views/notificaciones";
 import Perfil from "./views/perfil";
 import PreRegistro from "./views/preRegistro";
-import Registro from "./views/registro";
+import RegistroProfesor from "./views/registroProfesor";
 import Recupero from "./views/recupero";
 import Inicio from "./views/inicio";
 import { PrivateRoutes } from "./components/PrivateRoutes";
@@ -19,7 +19,8 @@ import RegistroClase from "./views/registroClase";
 import Clase from "./views/clase";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
-
+import RegistroAlumno from "./views/registroStudent";
+import mock from "./data/mock.json";
 function App() {
   const [user, setUser] = useState();
   return (
@@ -30,22 +31,21 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/login" element={<Login />} />
-            <Route path="registro" element={<Registro />} />
-            <Route path="registroAlum" element={<RegistroAlum />} />
-            <Route path="registroProf" element={<RegistroProf />} />
-            <Route path="recupero" element={<Recupero />} />
-            <Route path="olvido" element={<Olvido />} />
+            <Route path="/registroAlum" element={<RegistroAlumno />} />
+            <Route path="/registroProf" element={<RegistroProfesor />} />
+            <Route path="/preRegistro" element={<PreRegistro />} />
+            <Route path="/recupero" element={<Recupero />} />
+            <Route path="/olvido" element={<Olvido />} />
+            <Route path="/clases/:claseId" element={<Clase class={mock.classes[0]}/>} />
             <Route element={<PrivateRoutes />}>
-              <Route path="/clases" element={<Clases />}>
-                <Route path="/clases/:claseId" element={<Clase />} />
-                <Route path="/clases/new" element={<Clase />} />
-              </Route>
-              <Route path="mis-clases" element={<MisClases />}>
-                <Route path="mis-clases/:claseId" element={<Clase />} />
-              </Route>
-              <Route path="contrataciones" element={<Contrataciones />} />
-              <Route path="notificaciones" element={<Notificaciones />} />
-              <Route path="perfil" element={<Perfil />} />
+              <Route path="/clases" element={<Clases />}/>
+              
+              <Route path="/clases/new" element={<RegistroClase />} />
+              <Route path="/mis-clases" element={<MisClases />}/>
+              <Route path="/mis-clases/:claseId" element={<Clase />} />
+              <Route path="/contrataciones" element={<Contrataciones />} />
+              <Route path="/notificaciones" element={<Notificaciones />} />
+              <Route path="/perfil" element={<Perfil />} />
             </Route>
 
             <Route path="*" element={<h1>404 Not Found</h1>} />

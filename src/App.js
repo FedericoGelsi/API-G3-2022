@@ -4,41 +4,54 @@ import * as React from "react";
 import { theme } from "./components/theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./views/login.js";
-import Inicio from "./views/inicio";
-import MisCursos from "./views/mis-cursos";
+import Clases from "./views/clases";
+import MisClases from "./views/mis-clases";
 import Contrataciones from "./views/contrataciones";
 import Notificaciones from "./views/notificaciones";
 import Perfil from "./views/perfil";
 import PreRegistro from "./views/preRegistro";
-import Registro from "./views/registro";
+import RegistroProfesor from "./views/registroProfesor";
 import Recupero from "./views/recupero";
+import Inicio from "./views/inicio";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import Olvido from "./views/olvido";
 import RegistroClase from "./views/registroClase";
-
+import Clase from "./views/clase";
+import { UserContext } from "./contexts/UserContext";
+import { useState } from "react";
+import RegistroAlumno from "./views/registroStudent";
+import mock from "./data/mock.json";
 function App() {
+  const [user, setUser] = useState();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<Inicio />} />
-            <Route path="mis-cursos" element={<MisCursos />} />
-            <Route path="contrataciones" element={<Contrataciones />} />
-            <Route path="notificaciones" element={<Notificaciones />} />
-            <Route path="perfil" element={<Perfil />} />
-            <Route path="registroClase" element={<RegistroClase />}/>
-            
-          </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="registro" element={<Registro />} />
-          <Route path="preRegistro" element={<PreRegistro />} />
-          <Route path="recupero" element={<Recupero />} />
-          <Route path="*" element={<h1>404 Not Found</h1>} />
-          <Route path="olvido" element={<Olvido />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path="/login" element={<Login />} />
+            <Route path="/registroAlum" element={<RegistroAlumno />} />
+            <Route path="/registroProf" element={<RegistroProfesor />} />
+            <Route path="/preRegistro" element={<PreRegistro />} />
+            <Route path="/recupero" element={<Recupero />} />
+            <Route path="/olvido" element={<Olvido />} />
+            <Route path="/clases/:claseId" element={<Clase class={mock.classes[0]}/>} />
+            <Route element={<PrivateRoutes />}>
+              <Route path="/clases" element={<Clases />}/>
+              
+              <Route path="/clases/new" element={<RegistroClase />} />
+              <Route path="/mis-clases" element={<MisClases />}/>
+              <Route path="/mis-clases/:claseId" element={<Clase />} />
+              <Route path="/contrataciones" element={<Contrataciones />} />
+              <Route path="/notificaciones" element={<Notificaciones />} />
+              <Route path="/perfil" element={<Perfil />} />
+            </Route>
+
+            <Route path="*" element={<h1>404 Not Found</h1>} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </ThemeProvider>
   );
 }

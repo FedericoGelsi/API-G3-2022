@@ -5,14 +5,15 @@ import CardMedia from "@mui/material/CardMedia";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import CardStatusBadge from "./CardStatusBadge";
-import { Backdrop, Button, CardContent, Divider, Stack } from "@mui/material";
+import { Backdrop, Button, CardContent, Stack } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import { Mail } from "@mui/icons-material";
-import { Course, Status } from "../cursos/entities";
+import { Class, Status } from "../clases/entities";
 import CardContact from "./CardContact";
+import ClassDetails from "../clases/classDetails";
 
 CardContratacion.propTypes = {
-  course: PropTypes.instanceOf(Course),
+  course: PropTypes.instanceOf(Class),
 };
 
 function CardContratacion(props) {
@@ -39,9 +40,9 @@ function CardContratacion(props) {
       return "FINALIZAR";
     }
   };
-  const course = props.contratacion.course;
+  const clase = props.contratacion.class;
 
-  let cardImageUrl = "/img/" + (course.image ? course.image : "default.png");
+  let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
 
   return (
     <Card
@@ -71,29 +72,21 @@ function CardContratacion(props) {
           <CardStatusBadge status={props.contratacion.status} />
           <Stack direction="row" justifyContent="space-between" width="100%">
             <CardContent>
-              <Typography variant="h4">{course.name}</Typography>
+              <Typography variant="h4">{clase.name}</Typography>
               <Typography variant="subtitle1">
-                Profesor: {course.professor.getFullName()}
+                Profesor: {clase.professor.firstname + " " + clase.professor.lastname}
               </Typography>
               <Typography variant="subtitle1">
-                Materia: {course.subject}
+                Materia: {clase.subject}
               </Typography>
               <Typography variant="subtitle1">
-                Solicitada por: {props.contratacion.student.getFullName()}
+                Solicitada por:{" "}
+                {props.contratacion.student.firstname +
+                  " " +
+                  props.contratacion.student.lastname}
               </Typography>
             </CardContent>
-            <Stack
-              direction="column"
-              justifyContent="center"
-              spacing={1}
-              divider={<Divider orientation="horizontal" flexItem />}
-            >
-              <Typography variant="body2">
-                Duracion: {course.courseLength}
-              </Typography>
-              <Typography variant="body2">Frecuencia: {course.frec}</Typography>
-              <Typography variant="body2">Precio: {course.price}</Typography>
-            </Stack>
+            <ClassDetails clase={clase} />
           </Stack>
         </Stack>
       </Stack>
@@ -114,7 +107,11 @@ function CardContratacion(props) {
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={open}
           >
-            <CardContact user={props.contratacion.student} onClick={handleClose} />
+            <CardContact
+              user={props.contratacion.student}
+              reason={props.contratacion.reason}
+              onClick={handleClose}
+            />
           </Backdrop>
         </CardActions>
       </Stack>

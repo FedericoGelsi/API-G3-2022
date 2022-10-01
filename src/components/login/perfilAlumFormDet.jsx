@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,51 +7,38 @@ import {
   CardHeader,
   Divider,
   Grid,
-  TextField
-} from '@mui/material';
-
+  TextField,
+} from "@mui/material";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export const PerfilDetalleAlum = (props) => {
   const [values, setValues] = useState({
-    firstName: 'Juan',
-    lastName: 'Lopez',
-    email: 'demo@profesor.com',
-    telefono: '',
-    bornDate:'11/03/1980',
-    estudios: 'Ing Quimico',
-    
-
+    firstName: "Juan",
+    lastName: "Lopez",
+    email: "demo@profesor.com",
+    telefono: "",
+    bornDate: "11/03/1980",
+    estudios: "Ing Quimico",
   });
+
+  const userContex = useContext(UserContext);
 
   const handleChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
+    <form autoComplete="off" noValidate {...props}>
       <Card>
-        <CardHeader
-          subheader=""
-          title="Datos"
-        />
+        <CardHeader subheader="" title="Datos" />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 helperText=""
@@ -59,100 +46,93 @@ export const PerfilDetalleAlum = (props) => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={userContex.user.firstname}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Apellido/s"
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={userContex.user.lastname}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={12}
-              xs={24}
-            >
+            <Grid item md={12} xs={24}>
               <TextField
                 fullWidth
                 label="Direccion de mail"
                 name="email"
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={userContex.user.mail}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Fecha de Nacimiento"
-                name="bornDate"
+                name="birthdate"
                 onChange={handleChange}
                 //type="date"
-                value={values.bornDate}
+                value={userContex.user.birthdate}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Telefono"
                 name="telefono"
                 onChange={handleChange}
                 type="number"
-                value={values.telefono}
+                value={userContex.user.phone}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Estudios"
-                name="estudios"
-                onChange={handleChange}
-                required
-                value={values.estudios}
-                variant="outlined"
-              />
-            </Grid>
-            
+            {userContex.user.degrees.map((degree) => {
+              return (
+                <Grid item container direction="row" spacing={3} md={12} xs={24}>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Estudio"
+                      name="estudio"
+                      onChange={handleChange}
+                      required
+                      value={degree.title}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item  md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Estado"
+                      name="estado"
+                      onChange={handleChange}
+                      required
+                      value={degree.status}
+                      variant="outlined"
+                    />
+                  </Grid>
+                </Grid>
+              );
+            })}
           </Grid>
         </CardContent>
         <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
+          <Button color="primary" variant="contained">
             Guardar
           </Button>
         </Box>

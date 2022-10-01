@@ -14,8 +14,8 @@ import Button from "@mui/material/Button";
 import { Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import AppLogo from "./appLogo";
-
-
+import { UserContext } from "../../contexts/UserContext";
+import { useContext } from "react";
 class Page {
   constructor(link, name) {
     this.link = link;
@@ -23,21 +23,24 @@ class Page {
   }
 }
 
-const pages = [
-  new Page("/", "Inicio"),
-  new Page("/mis-cursos", "Mis Cursos"),
+const pagesStudent = [
+  new Page("/clases", "Inicio"),
+  new Page("/mis-clases", "Mis Clases"),
   new Page("/contrataciones", "Contrataciones"),
 ];
 
-const settings = [
-  new Page("/perfil", "Perfil"),
-  new Page("/login", "Logout")
+const pagesProfessor = [
+  new Page("/mis-clases", "Mis Clases"),
+  new Page("/contrataciones", "Contrataciones"),
 ];
+
+const settings = [new Page("/perfil", "Perfil"), new Page("/", "Logout")];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const  {setUser} = useContext(UserContext);
+  const contextUser = useContext(UserContext);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -52,6 +55,19 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    setUser(undefined);
+    handleCloseUserMenu();
+  };
+
+  const handlePages = () => {
+    return contextUser.user.role === "professor"
+      ? pagesProfessor
+      : pagesStudent;
+  };
+
+  const pages = handlePages();
 
   return (
     <AppBar position="sticky">
@@ -162,17 +178,24 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <Link
-                  key={setting.link}
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={setting.link}
-                >
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting.name}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+              <Link
+                key={settings[0].link}
+                style={{ textDecoration: "none", color: "black" }}
+                to={settings[0].link}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{settings[0].name}</Typography>
+                </MenuItem>
+              </Link>
+              <Link
+                key={settings[1].link}
+                style={{ textDecoration: "none", color: "black" }}
+                to={settings[1].link}
+              >
+                <MenuItem onClick={handleLogout}>
+                  <Typography textAlign="center">{settings[1].name}</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
         </Toolbar>

@@ -1,18 +1,12 @@
 import GridPage from "../components/GridPage";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Container, Typography, Link, Box, Divider } from "@mui/material";
+import { Typography, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
-import RegistroClaseForm from "../components/cursos/registroClaseForm";
+import RegistroClaseForm from "../components/clases/registroClaseForm";
 import { motion } from "framer-motion";
 
 //////////////////////////////////
-const RootStyle = styled("div")({
-  background: "rgb(249, 250, 251)",
-  height: "100vh",
-  display: "grid",
-  placeItems: "center",
-});
+
 
 const HeadingStyle = styled(Box)({
   textAlign: "center",

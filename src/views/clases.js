@@ -3,12 +3,9 @@ import CardClase from "../components/clases/classCard";
 import GridPage from "../components/GridPage";
 import SearchFilter from "../components/clases/SearchFilter";
 import { Stack } from "@mui/system";
-import { UserContext } from "../contexts/UserContext";
-import { useContext } from "react";
 import mock from "../data/mock.json";
 
 function Clases(props) {
-  const context = useContext(UserContext);
 
   function getClasses() {
     return mock.classes;

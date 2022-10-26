@@ -1,4 +1,4 @@
-import { AppBar, Button, Container, Toolbar } from "@mui/material";
+import { AppBar, Button, Container } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import AppLogo from "./appLogo";

@@ -21,6 +21,7 @@ import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
 import RegistroAlumno from "./views/registroStudent";
 import mock from "./data/mock.json";
+
 function App() {
   const [user, setUser] = useState();
   return (
@@ -36,12 +37,14 @@ function App() {
             <Route path="/preRegistro" element={<PreRegistro />} />
             <Route path="/recupero" element={<Recupero />} />
             <Route path="/olvido" element={<Olvido />} />
-            <Route path="/clases/:claseId" element={<Clase class={mock.classes[0]}/>} />
             <Route element={<PrivateRoutes />}>
-              <Route path="/clases" element={<Clases />}/>
-              
+              <Route
+                path="/clases/:claseId"
+                element={<Clase class={mock.classes[0]} />}
+              />
+              <Route path="/clases" element={<Clases />} />
               <Route path="/clases/new" element={<RegistroClase />} />
-              <Route path="/mis-clases" element={<MisClases />}/>
+              <Route path="/mis-clases" element={<MisClases />} />
               <Route path="/mis-clases/:claseId" element={<Clase />} />
               <Route path="/contrataciones" element={<Contrataciones />} />
               <Route path="/notificaciones" element={<Notificaciones />} />

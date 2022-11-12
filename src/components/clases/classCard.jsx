@@ -10,7 +10,7 @@ import ClassConfirmationPopUp from "./classConfirmationPopup";
 
 export default function CardClase(props) {
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -49,7 +49,7 @@ export default function CardClase(props) {
               color="secondary"
               size="small"
               variant="extended"
-              onClick={handleClickOpen}
+              onClick={handleOpen}
             >
               <Typography variant="button">Contratar</Typography>
               <ShoppingCart />

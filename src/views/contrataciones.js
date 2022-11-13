@@ -1,9 +1,10 @@
 import CardContratacion from "../components/contrataciones/CardContratacion";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import GridPage from "../components/GridPage";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import mock from "../data/mock.json";
+import BackButtonBar from "../components/clases/backButtonBar";
 
 function Contrataciones(props) {
   const userContext = useContext(UserContext);
@@ -30,7 +31,10 @@ function Contrataciones(props) {
 
   return (
     <GridPage>
-      <Grid container direction="column" spacing={{ xs: 2, md: 2 }}>
+      <Grid item my={2}>
+        <Typography variant="h4">Contrataciones</Typography>
+      </Grid>
+      <Grid item container direction="column" spacing={{ xs: 2, md: 2 }}>
         {contracts.map((_, index) => (
           <Grid item key={index}>
             <CardContratacion contratacion={_} />

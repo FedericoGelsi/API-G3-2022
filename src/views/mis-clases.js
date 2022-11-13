@@ -36,7 +36,7 @@ function MisClases(props) {
 
   return (
     <GridPage>
-      <Grid item>
+      <Grid item my={2}>
         <Typography variant="h4">Mis Clases</Typography>
       </Grid>
       {userContext.user.role === "professor" && (

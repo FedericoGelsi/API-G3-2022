@@ -5,7 +5,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Chip, Fab } from "@mui/material";
 import { Stack } from "@mui/system";
-import { ArrowForward } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 export default function CardClase(props) {
@@ -49,7 +48,6 @@ export default function CardClase(props) {
             onClick={handleClass}
           >
             <Typography variant="button">Ver clase</Typography>
-            <ArrowForward />
           </Fab>
         </Stack>
       </Stack>

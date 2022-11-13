@@ -6,7 +6,6 @@ import { Stack } from "@mui/system";
 import mock from "../data/mock.json";
 
 function Clases(props) {
-
   function getClasses() {
     return mock.classes;
   }
@@ -15,36 +14,34 @@ function Clases(props) {
 
   return (
     <GridPage>
-      <Stack direction="column" spacing={2}>
+      <Grid item my={2}>
         <Typography variant="h4">Clases</Typography>
-        <Grid
-          container
-          direction="row"
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 2, sm: 8, md: 12 }}
-        >
-          <Grid item xs={2} sm={2} md={4}>
-            <SearchFilter />
-          </Grid>
-          <Grid item xs={2} sm={6} md={8}>
-            <Grid
-              container
-              direction="row"
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 2, sm: 8, md: 8 }}
-            >
-              {classes.map((clase, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
-                  <CardClase
-                    variant="home"
-                    clase={clase}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 2, sm: 8, md: 12 }}
+      >
+        <Grid item xs={2} sm={2} md={4}>
+          <SearchFilter />
+        </Grid>
+        <Grid item xs={2} sm={6} md={8}>
+          <Grid
+            container
+            direction="row"
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 2, sm: 8, md: 8 }}
+          >
+            {classes.map((clase, index) => (
+              <Grid item xs={2} sm={4} md={4} key={index}>
+                <CardClase variant="home" clase={clase} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
-      </Stack>
+      </Grid>
     </GridPage>
   );
 }

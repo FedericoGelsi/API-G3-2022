@@ -3,7 +3,11 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
-import Zoom from "@mui/material/Zoom";
+import {
+  DialogContent,
+  DialogContentText,
+} from "@mui/material";
+import { ContratacionForm } from "./ContratacionForm";
 
 function ClassConfirmationPopUp(props) {
   return (
@@ -13,11 +17,13 @@ function ClassConfirmationPopUp(props) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle>{"Esta seguro de contratar esta clase?"}</DialogTitle>
-      <DialogActions>
-        <Button onClick={props.handleClose}>Cancelar</Button>
-        <Button color="secondary" variant="contained" onClick={props.handleClose}>Contratar</Button>
-      </DialogActions>
+      <DialogTitle>Contratar clase</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Para contratar esta clase debe ingresar los siguientes datos.
+        </DialogContentText>
+        <ContratacionForm handleClose={props.handleClose} />
+      </DialogContent>
     </Dialog>
   );
 }

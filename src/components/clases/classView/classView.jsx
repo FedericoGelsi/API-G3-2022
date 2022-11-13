@@ -6,7 +6,7 @@ import { Button, Card, Chip, Grid } from "@mui/material";
 import { Stack } from "@mui/system";
 import { ShoppingCart } from "@mui/icons-material";
 import ClassDetails from "./classDetails";
-import ClassConfirmationPopUp from "../classConfirmationPopup";
+import ClassConfirmationPopUp from "./classConfirmationPopup";
 import ProfessorDetails from "./ProfessorDetails";
 import { Outlet } from "react-router-dom";
 

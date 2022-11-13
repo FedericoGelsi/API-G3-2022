@@ -10,7 +10,7 @@ import Fab from "@mui/material/Fab";
 import { Mail } from "@mui/icons-material";
 import { Class, Status } from "../clases/entities";
 import CardContact from "./CardContact";
-import ClassDetails from "../clases/classDetails";
+import ClassDetails from "../clases/classView/classDetails";
 
 CardContratacion.propTypes = {
   course: PropTypes.instanceOf(Class),

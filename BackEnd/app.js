@@ -8,8 +8,7 @@ var cors = require('cors');
 
 //importo router
 var indexRouter = require('./routes/index');
-var apiRouterEst = require('./routes/estudiante.route'); //Custom
-var apiRouterProf = require('./routes/profesor.route'); //Custom
+var apiRouter = require('./routes/user.route'); //Custom
 var utilRouter = require('./routes/utils');
 
 //instancio el servidor
@@ -28,8 +27,7 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //Indico las rutas de los endpoint
-app.use('/estudiante', apiRouterEst);
-app.use('/profesor', apiRouterProf);
+app.use('/users', apiRouter);
 app.use('/', indexRouter);
 app.use('/utils/',utilRouter);
 
@@ -67,7 +65,16 @@ app.use(function (req, res, next) {
   
 });
 
-
+// error handler
+/*app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'Development' ? err : {};
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+*/
 // Setup server port
 var port = process.env.PORT || 8080;
 // Escuchar en el puerto

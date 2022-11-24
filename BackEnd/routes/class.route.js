@@ -7,11 +7,10 @@ var Authorization = require('../auth/authorization');
 // Authorize each API with middleware and map to the Controller Functions
 
 
-router.post('/registration', ClassController.createUser)
-router.get('/',Authorization, ClassController.getUsers)
-router.put('/', Authorization, ClassController.updateUser)
-router.delete('/:id', Authorization, ClassController.removeUser)
-
+router.post('/registration', ClassController.createClass)
+router.get('/',Authorization, ClassController.getClasses)
+router.put('/modify', Authorization, ClassController.updateClass)
+router.delete('/:id', Authorization, ClassController.removeClass)
 
 
 

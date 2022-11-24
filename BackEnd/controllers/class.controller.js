@@ -1,89 +1,70 @@
 const { type } = require('os');
-var UserService = require('../services/user.service');
-var UserImgService =require('../services/userImg.service');
+var ClassService = require('../services/class.service');
 
 // Saving the context of this module inside the _the variable
 _this = this;
 
 // Async Controller function to get the To do List
-exports.getUsers = async function (req, res, next) {
+exports.getClasses = async function (req, res) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     try {
-        var Users = await UserService.getUsers({}, page, limit)
+        var Classes = await ClassService.getClasses({}, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
+        return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
     }
 }
-exports.getUsersByMail = async function (req, res, next) {
+exports.getClassesByName = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {email: req.body.email}
+    let filtro= {name: req.body.name}
     try {
-        var Users = await UserService.getUsers(filtro, page, limit)
+        var Classes = await ClassService.getClasses(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
+        return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
     }
 }
 
-exports.createUser = async function (req, res, next) {
+exports.createClass = async function (req, res) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller",req.body)
 
-        var UserStudent = {
-            type: req.body.type,
+        var Class = {
+            
             name: req.body.name,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-            phone: req.body.phone,
-            birthDate: req.body.birthDate,
-            education: req.body.education,
+            subject: req.body.subject,
+            description: req.body.description,
+            duration: req.body.duration,
+            frequency: req.body.frequency,
+            cost: req.body.cost
             
         }
        
-        var UserProfessor = {
-            type: req.body.type,
-            name: req.body.name,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-            phone: req.body.phone,
-            birthDate: req.body.birthDate,
-            title:req.body.title,
-            experience:req.body.experience
-        }
-        
     
     try {
         // Calling the Service function with the new object from the Request Body
-
-        if(req.body.type==="Student"){
-            var createdUser = await UserService.createUser(UserStudent)
-        }
-        else{
-            var createdUser = await UserService.createUser(UserProfessor)
-        }
         
-        return res.status(201).json({createdUser, message: "Succesfully Created User"})
+        var createdClass = await ClassService.createClass(Class)
+        
+        return res.status(201).json({createdClass, message: "Succesfully Created Class"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "User Creation was Unsuccesfull"})
+        return res.status(400).json({status: 400, message: "Class Creation was Unsuccesfull"})
     }
 }
 
-exports.updateUser = async function (req, res, next) {
+exports.updateClass = async function (req, res) {
 
     // Id is necessary for the update
     if (!req.body.name) {
@@ -91,25 +72,28 @@ exports.updateUser = async function (req, res, next) {
     }
 
     
-    var User = {
+    var Class = {
        
-        name: req.body.name ? req.body.name : null,
-        email: req.body.email ? req.body.email : null,
-        password: req.body.password ? req.body.password : null
+        name: req.body.name ? req.body.name: null,
+        subject: req.body.subject ? req.body.subject: null,
+        description: req.body.description ? req.body.description: null,
+        duration: req.body.duration? req.body.duration: null,
+        frequency: req.body.frequency? req.body.frequency: null,
+        cost: req.body.cost? req.body.cost: null
     }
     try {
-        var updatedUser = await UserService.updateUser(User)
-        return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
+        var updatedClass = await ClassService.updateClass(Class)
+        return res.status(200).json({status: 200, data: updatedClass, message: "Succesfully Updated User"})
     } catch (e) {
         return res.status(400).json({status: 400., message: e.message})
     }
 }
 
-exports.removeUser = async function (req, res, next) {
+exports.removeClass = async function (req, res, ) {
 
     var id = req.params.id;
     try {
-        var deleted = await UserService.deleteUser(id);
+        var deleted = await ClassService.deleteClass(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message})
@@ -117,75 +101,5 @@ exports.removeUser = async function (req, res, next) {
 }
 
 
-exports.loginUser = async function (req, res) {
-    // Req.Body contains the form submit values.
-    console.log("body",req.body)
-    var User = {
-        email: req.body.email,
-        password: req.body.password
-    }
-    try {
-        // Calling the Service function with the new object from the Request Body
-        var loginUser = await UserService.loginUser(User);
-        if (loginUser===0)
-            return res.status(400).json({message: "Error en la contraseña"})
-        else
-            return res.status(201).json({loginUser, message: "Succesfully login"})
-    } catch (e) {
-        //Return an Error Response Message with Code and the Error Message.
-        return res.status(400).json({status: 400, message: "Invalid username or password"})
-    }
-}
 
-exports.guardarImagenUser = async function (req, res) {
-
-    console.log("ImgUser",req.body)
-    // Id is necessary for the update
-    if (!req.body.email) {
-        return res.status(400).json({status: 400., message: "Mail must be present"})
-    }
-
-    let userImg = {
-        email: req.body.email,
-        nombreImagen : req.body.nombreImagen
-    }
-    
-    try {
-        if (userImg.nombreImagen!=='')
-        {
-            var newUserImg = await UserImgService.createUserImg(userImg);
-        }
-        
-        return res.status(201).json({status: 201, message: "Imagen cargada"});
-        
-    } catch (e) {
-        console.log("error guardar imagen",e)
-        return res.status(400).json({status: 400., message: e.message})
-    }
-}
-
-exports.getImagenUserByMail = async function (req, res) {
-
-    // Check the existence of the query parameters, If doesn't exists assign a default value
-    var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
-    //obtener filtro
-    var filtro = {
-        mail: req.body.email
-    }
-    try {
-        var UsersImg = await UserImgService.getImagenesByUser(filtro, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
-        console.log("userByDni",UsersImg)
-        if (UsersImg.total===0)
-            return res.status(201).json({status: 201, data: UsersImg, message: "No existe Mail"});
-        else
-            return res.status(200).json({status: 200, data: UsersImg, message: "Succesfully Users Recieved"});
-    } catch (e) {
-        //Return an Error Response Message with Code and the Error Message.
-        console.log(e)
-        return res.status(400).json({status: 400, message: e.message});
-    }
-}
-    
     

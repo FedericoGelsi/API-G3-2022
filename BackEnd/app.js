@@ -11,6 +11,8 @@ var indexRouter = require('./routes/index');
 var apiUserRouter = require('./routes/user.route'); //Custom
 var apiClassRouter = require('./routes/class.route'); //Custom
 var apiCommentRouter = require('./routes/comment.route'); //Custom
+var apiContractingRouter = require('./routes/contracting.route'); //Custom
+var apiNotificationRouter = require('./routes/notification.route'); //Custom
 var utilRouter = require('./routes/utils');
 
 //instancio el servidor
@@ -32,6 +34,8 @@ app.use(cookieParser());
 app.use('/users', apiUserRouter);
 app.use('/class', apiClassRouter);
 app.use('/comment', apiCommentRouter);
+app.use('/contracting', apiContractingRouter);
+app.use('/notification', apiNotificationRouter);
 app.use('/', indexRouter);
 app.use('/utils/',utilRouter);
 

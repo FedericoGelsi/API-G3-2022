@@ -8,7 +8,8 @@ var cors = require('cors');
 
 //importo router
 var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/user.route'); //Custom
+var apiRouterEst = require('./routes/estudiante.route'); //Custom
+var apiRouterProf = require('./routes/profesor.route'); //Custom
 var utilRouter = require('./routes/utils');
 
 //instancio el servidor
@@ -27,7 +28,8 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //Indico las rutas de los endpoint
-app.use('/users', apiRouter);
+app.use('/estudiante', apiRouterEst);
+app.use('/profesor', apiRouterProf);
 app.use('/', indexRouter);
 app.use('/utils/',utilRouter);
 

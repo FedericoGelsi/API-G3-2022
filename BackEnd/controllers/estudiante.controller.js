@@ -1,60 +1,65 @@
-var UserService = require('../services/user.service');
-var UserImgService =require('../services/userImg.service');
+var StudentService = require('../services/student.service');
+var StudentImgService =require('../services/userImg.service');
 
 // Saving the context of this module inside the _the variable
 _this = this;
 
 // Async Controller function to get the To do List
-exports.getUsers = async function (req, res, next) {
+exports.getStudent = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     try {
-        var Users = await UserService.getUsers({}, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
+        var Students = await StudentService.getStudent({}, page, limit)
+        // Return the Students list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Students, message: "Succesfully Student Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
     }
 }
-exports.getUsersByMail = async function (req, res, next) {
+exports.getStudentByMail = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     let filtro= {email: req.body.email}
     try {
-        var Users = await UserService.getUsers(filtro, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
+        var Students = await StudentService.getStudent(filtro, page, limit)
+        // Return the Students list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Students, message: "Succesfully Student Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
     }
 }
 
-exports.createUser = async function (req, res, next) {
+exports.createStudent = async function (req, res) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller",req.body)
-    var User = {
-        name: req.body.name,
+    var Student = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        phone: req.body.phone,
+        birthDate: req.body.birthDate,
+        studies: req.body.studies
+
     }
     try {
         // Calling the Service function with the new object from the Request Body
-        var createdUser = await UserService.createUser(User)
-        return res.status(201).json({createdUser, message: "Succesfully Created User"})
+        var createdStudent = await StudentService.createStudent(Student)
+        return res.status(201).json({createdStudent, message: "Succesfully Created Student"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "User Creation was Unsuccesfull"})
+        return res.status(400).json({status: 400, message: "Student Creation was Unsuccesfull"})
     }
 }
 
-exports.updateUser = async function (req, res, next) {
+exports.updatedStudent = async function (req, res, next) {
 
     // Id is necessary for the update
     if (!req.body.name) {
@@ -62,25 +67,29 @@ exports.updateUser = async function (req, res, next) {
     }
 
     
-    var User = {
+    var Student = {
        
-        name: req.body.name ? req.body.name : null,
+        firstName: req.body.firstName ? req.body.firstName : null,
+        lastName: req.body.lastName ? req.body.lastName : null,
         email: req.body.email ? req.body.email : null,
-        password: req.body.password ? req.body.password : null
+        password: req.body.password ? req.body.password : null,
+        phone: req.body.phone? req.body.phone:null,
+        birthDate: req.body.birthDate ? req.body.birthDate:null,
+        studies: req.body.studies ? req.body.studies : null
     }
     try {
-        var updatedUser = await UserService.updateUser(User)
-        return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
+        var updatedStudent = await StudentService.updatedStudent(Student)
+        return res.status(200).json({status: 200, data: updatedStudent, message: "Succesfully Updated Student"})
     } catch (e) {
         return res.status(400).json({status: 400., message: e.message})
     }
 }
 
-exports.removeUser = async function (req, res, next) {
+exports.removeStudent = async function (req, res, next) {
 
     var id = req.params.id;
     try {
-        var deleted = await UserService.deleteUser(id);
+        var deleted = await StudentService.deleteStudent(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message})
@@ -88,43 +97,43 @@ exports.removeUser = async function (req, res, next) {
 }
 
 
-exports.loginUser = async function (req, res) {
+exports.loginStudent = async function (req, res) {
     // Req.Body contains the form submit values.
     console.log("body",req.body)
-    var User = {
+    var Student = {
         email: req.body.email,
         password: req.body.password
     }
     try {
         // Calling the Service function with the new object from the Request Body
-        var loginUser = await UserService.loginUser(User);
-        if (loginUser===0)
+        var loginStudent = await StudentService.loginStudent(Student);
+        if (loginStudent===0)
             return res.status(400).json({message: "Error en la contraseña"})
         else
-            return res.status(201).json({loginUser, message: "Succesfully login"})
+            return res.status(201).json({loginStudent, message: "Succesfully login"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
-        return res.status(400).json({status: 400, message: "Invalid username or password"})
+        return res.status(400).json({status: 400, message: "Invalid Studentname or password"})
     }
 }
 
-exports.guardarImagenUser = async function (req, res) {
+exports.guardarImagenStudent = async function (req, res) {
 
-    console.log("ImgUser",req.body)
+    console.log("ImgStudent",req.body)
     // Id is necessary for the update
     if (!req.body.email) {
         return res.status(400).json({status: 400., message: "Mail must be present"})
     }
 
-    let userImg = {
+    let StudentImg = {
         email: req.body.email,
         nombreImagen : req.body.nombreImagen
     }
     
     try {
-        if (userImg.nombreImagen!=='')
+        if (StudentImg.nombreImagen!=='')
         {
-            var newUserImg = await UserImgService.createUserImg(userImg);
+            var newStudentImg = await StudentImgService.createStudentImg(StudentImg);
         }
         
         return res.status(201).json({status: 201, message: "Imagen cargada"});
@@ -135,7 +144,7 @@ exports.guardarImagenUser = async function (req, res) {
     }
 }
 
-exports.getImagenUserByMail = async function (req, res) {
+exports.getImagenStudentByMail = async function (req, res) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
@@ -145,13 +154,13 @@ exports.getImagenUserByMail = async function (req, res) {
         mail: req.body.email
     }
     try {
-        var UsersImg = await UserImgService.getImagenesByUser(filtro, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
-        console.log("userByDni",UsersImg)
-        if (UsersImg.total===0)
-            return res.status(201).json({status: 201, data: UsersImg, message: "No existe Mail"});
+        var StudentsImg = await StudentImgService.getImagenesByStudent(filtro, page, limit)
+        // Return the Students list with the appropriate HTTP password Code and Message.
+        console.log("StudentByDni",StudentsImg)
+        if (StudentsImg.total===0)
+            return res.status(201).json({status: 201, data: StudentsImg, message: "No existe Mail"});
         else
-            return res.status(200).json({status: 200, data: UsersImg, message: "Succesfully Users Recieved"});
+            return res.status(200).json({status: 200, data: StudentsImg, message: "Succesfully Students Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)

@@ -1,5 +1,6 @@
 // Gettign the Newly created Mongoose Model we just created 
-var User = require('../models/User.model');
+var UserStudent = require('../models/UserStudent.model');
+var UserProfessor = require('../models/UserProfessor.model');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
@@ -31,13 +32,40 @@ exports.getUsers = async function (query, page, limit) {
 exports.createUser = async function (user) {
     // Creating a new Mongoose Object by using the new keyword
     var hashedPassword = bcrypt.hashSync(user.password, 8);
+
+    if (user.type=='student'){
+
+        var newUser = new UserStudent({
+            type: user.type,
+            name: user.name,
+            lastName: user.lastName,
+            email: user.email,
+            password: hashedPassword,
+            phone: user.phone,
+            birthDate: user.birthDate,
+            education: user.education,
+            createdDate: new Date()
+        })
+    }
+
+    else{
+        var newUser = new UserProfessor({
+            
+            type: user.type,
+            name: user.name,
+            lastName: user.lastName,
+            email: user.email,
+            password: hashedPassword,
+            phone: user.phone,
+            birthDate: user.birthDate,
+            title: user.title,
+            experience: user.experience,
+            createdDate: new Date()
+        })
+
+    }
     
-    var newUser = new User({
-        name: user.name,
-        email: user.email,
-        date: new Date(),
-        password: hashedPassword
-    })
+    
 
     try {
         // Saving the User 
@@ -60,14 +88,25 @@ exports.updateUser = async function (user) {
     var id = {name :user.name}
 
     try {
-        //Find the old User Object by the Id
-        var oldUser = await User.findOne(id);
+        //Find the old User Object by the Id for Student
+        var oldUser = await UserStudent.findOne(id);
     } catch (e) {
         throw Error("Error occured while Finding the User")
     }
     // If no old User Object exists return false
     if (!oldUser) {
-        return false;
+
+        try {
+            //Find the old User Object by the Id for Professor
+            var oldUser = await UserProfessor.findOne(id);
+        } catch (e) {
+            throw Error("Error occured while Finding the User")
+        }
+        
+        if(!oldUser){
+            return false;
+        }
+        
     }
     //Edit the User Object
     var hashedPassword = bcrypt.hashSync(user.password, 8);
@@ -105,9 +144,19 @@ exports.loginUser = async function (user) {
     try {
         // Find the User 
         console.log("login:",user)
-        var _details = await User.findOne({
+
+        
+        var _details = await UserStudent.findOne({
             email: user.email
+            
         });
+
+        if (!_details) {
+            var _details = await UserProfessor.findOne({
+                email: user.email
+            });
+        }
+        
         var passwordIsValid = bcrypt.compareSync(user.password, _details.password);
         if (!passwordIsValid) return 0;
 

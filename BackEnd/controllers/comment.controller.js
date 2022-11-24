@@ -36,7 +36,7 @@ exports.getUsersByMail = async function (req, res, next) {
     }
 }
 
-exports.createUser = async function (req, res) {
+exports.createUser = async function (req, res, next) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller",req.body)
 
@@ -49,7 +49,7 @@ exports.createUser = async function (req, res) {
             phone: req.body.phone,
             birthDate: req.body.birthDate,
             education: req.body.education,
-
+            
         }
        
         var UserProfessor = {
@@ -68,7 +68,7 @@ exports.createUser = async function (req, res) {
     try {
         // Calling the Service function with the new object from the Request Body
 
-        if(req.body.type==="student"){
+        if(req.body.type==="Student"){
             var createdUser = await UserService.createUser(UserStudent)
         }
         else{

@@ -17,6 +17,7 @@ import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { POST } from "../../hooks/apiCrud";
+import { useCookies } from "react-cookie";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -30,7 +31,8 @@ const animate = {
 };
 
 const LoginForm = () => {
-  const { user, setUser, setToken } = useContext(UserContext);
+  const { setUser, setToken } = useContext(UserContext);
+  const [cookies, setCookie ] = useCookies(['user-token']);
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -63,15 +65,17 @@ const LoginForm = () => {
     },
   });
 
-  const handleLogin = (values) => {
-    const loginData = getLogin(values);
-    if (loginData) {
-      setToken(loginData.loginUser.token);
-      setUser(loginData.loginUser.user);
-      navigate(user.type === "professor" ? "/mis-clases" : "/clases");
-    } else {
-      alert("Usuario o Contrasenia inconrrecta.");
-    }
+  const handleLogin = async (values) => {
+    getLogin(values).then((loginData) => {
+      if (loginData) {
+        setToken(loginData.loginUser.token);
+        setUser(loginData.loginUser.user);
+        setCookie('user-token', loginData.loginUser.token);
+        navigate(loginData.loginUser.user.type === "professor" ? "/mis-clases" : "/clases");
+      } else {
+        alert("Usuario o Contrasenia inconrrecta.");
+      }
+    });
   };
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =

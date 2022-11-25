@@ -9,19 +9,15 @@ function Contrataciones(props) {
   const userContext = useContext(UserContext);
 
   const getProfessorContracts = () => {
-    return mock.contracts.filter((contract) => {
-      return contract.class.professor.id === userContext.user.id;
-    });
+    return mock.contracts;
   };
 
   const getUserContracts = () => {
-    return mock.contracts.filter((contract) => {
-      return contract.student.id === userContext.user.id;
-    });
+    return mock.contracts;
   };
 
   const getContracts = () => {
-    return userContext.user.role === "professor"
+    return userContext.user.type === "professor"
       ? getProfessorContracts()
       : getUserContracts();
   };

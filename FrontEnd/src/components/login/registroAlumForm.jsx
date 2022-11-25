@@ -65,8 +65,7 @@ const RegistroFormProf = ({ setAuth }) => {
       password: "",
       telefono:"",
       bornDate:"",
-      estudios:"",
-      
+      estudios:""
     },
     validationSchema: SignupSchema,
     onSubmit: () => {

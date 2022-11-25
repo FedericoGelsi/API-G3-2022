@@ -10,19 +10,21 @@ function MisClases(props) {
   const userContext = useContext(UserContext);
 
   const getStudentContracts = () => {
+    return mock.contracts;
     return mock.contracts.filter((_) => {
       return _.student.id === userContext.user.id;
     });
   };
 
   const getProfessorContracts = () => {
+    return mock.contracts;
     return mock.contracts.filter((_) => {
       return _.class.professor.id === userContext.user.id;
     });
   };
 
   const getMyClasses = () => {
-    return userContext.user.role === "student"
+    return userContext.user.type === "student"
       ? getStudentContracts()
       : getProfessorContracts();
   };
@@ -39,7 +41,7 @@ function MisClases(props) {
       <Grid item my={2}>
         <Typography variant="h4">Mis Clases</Typography>
       </Grid>
-      {userContext.user.role === "professor" && (
+      {userContext.user.type === "professor" && (
         <Grid item>
           <Fab color="secondary" variant="extended" onClick={handleNewClass}>
             <Add />

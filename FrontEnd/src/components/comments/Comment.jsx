@@ -15,7 +15,8 @@ import ConfirmDelete from "./ConfirmDelete";
 import { useTheme } from "@mui/material/styles";
 import { UserContext } from "../../contexts/UserContext";
 
-const Comment = ({ comment }) => {
+const Comment = (props) => {
+  const comment = props.comment;
   const userContext = useContext(UserContext);
   const theme = useTheme();
   const [editingComm, setEditingComm] = useState(false);

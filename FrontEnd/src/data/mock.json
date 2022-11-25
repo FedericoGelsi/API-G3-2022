@@ -1,61 +1,4 @@
 {
-  "loginUsers": [
-    {
-      "mail": "profe@mail.com",
-      "name": "Profesor 1",
-      "role": "professor"
-    },
-    {
-      "mail": "alumno@mail.com",
-      "name": "Alumno 1",
-      "role": "student"
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "role": "professor",
-      "firstname": "Jhon",
-      "lastname": "Doe",
-      "mail": "profe@mail.com",
-      "phone": "1133445566",
-      "birthdate": "1989-02-03",
-      "password": "soyprofesor",
-      "contactTime": "12:00 - 18:00",
-      "degree": "Ingeniero de Software",
-      "experience": [
-        {
-          "title": "Experiencia 1",
-          "description": "Descripcion exp 1"
-        },
-        {
-          "title": "Experiencia 2",
-          "description": "Descripcion exp 2"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "role": "student",
-      "firstname": "Jane",
-      "lastname": "Doe",
-      "mail": "alumno@mail.com",
-      "phone": "1133445599",
-      "birthdate": "04/05/2002",
-      "password": "soyalumno",
-      "contactTime": "12:00 - 18:00",
-      "degrees": [
-        {
-          "title": "Secundario basico",
-          "status": "Finalizado"
-        },
-        {
-          "title": "Tecnicatura en Desarrollo de Software",
-          "status": "En curso"
-        }
-      ]
-    }
-  ],
   "classes": [
     {
       "id": 1,
@@ -66,7 +9,7 @@
         "id": 1,
         "firstname": "Jhon",
         "lastname": "Doe",
-        "mail": "profe@mail.com",
+        "mail": "chuaman@foreducation.com",
         "phone": "1133445566",
         "contactTime": "12:00 - 18:00",
         "degree": "Ingeniero de Software",
@@ -98,7 +41,7 @@
         "id": 1,
         "firstname": "Jhon",
         "lastname": "Doe",
-        "mail": "profe@mail.com",
+        "mail": "chuaman@foreducation.com",
         "phone": "1133445566",
         "contactTime": "12:00 - 18:00",
         "degree": "Ingeniero de Software",
@@ -133,7 +76,7 @@
           "id": 2,
           "firstname": "Jhon",
           "lastname": "Doe",
-          "mail": "profe@mail.com",
+          "mail": "chuaman@foreducation.com",
           "phone": "1133445566",
           "contactTime": "12:00 - 18:00",
           "degree": "Ingeniero de Software",
@@ -160,7 +103,7 @@
         "role": "student",
         "firstname": "Jane",
         "lastname": "Doe",
-        "mail": "alumno@mail.com",
+        "mail": "fgelsi@foreducation.com",
         "phone": "1133445599",
         "birthdate": "04/05/2002",
         "password": "soyalumno",
@@ -189,7 +132,7 @@
           "id": 1,
           "firstname": "Jhon",
           "lastname": "Doe",
-          "mail": "profe@mail.com",
+          "mail": "chuaman@foreducation.com",
           "phone": "1133445566",
           "contactTime": "12:00 - 18:00",
           "degree": "Ingeniero de Software",
@@ -216,7 +159,7 @@
         "role": "student",
         "firstname": "Jane",
         "lastname": "Doe",
-        "mail": "alumno@mail.com",
+        "mail": "fgelsi@foreducation.com",
         "phone": "1133445599",
         "birthdate": "04/05/2002",
         "password": "soyalumno",
@@ -245,7 +188,7 @@
           "id": 1,
           "firstname": "Jhon",
           "lastname": "Doe",
-          "mail": "profe@mail.com",
+          "mail": "chuaman@foreducation.com",
           "phone": "1133445566",
           "contactTime": "12:00 - 18:00",
           "degree": "Ingeniero de Software",
@@ -272,7 +215,7 @@
         "role": "student",
         "firstname": "Jane",
         "lastname": "Doe",
-        "mail": "alumno@mail.com",
+        "mail": "fgelsi@foreducation.com",
         "phone": "1133445599",
         "birthdate": "04/05/2002",
         "password": "soyalumno",
@@ -301,7 +244,7 @@
           "id": 1,
           "firstname": "Jhon",
           "lastname": "Doe",
-          "mail": "profe@mail.com",
+          "mail": "chuaman@foreducation.com",
           "phone": "1133445566",
           "contactTime": "12:00 - 18:00",
           "degree": "Ingeniero de Software",
@@ -328,7 +271,7 @@
         "role": "student",
         "firstname": "Jane",
         "lastname": "Doe",
-        "mail": "alumno@mail.com",
+        "mail": "fgelsi@foreducation.com",
         "phone": "1133445599",
         "birthdate": "04/05/2002",
         "password": "soyalumno",

@@ -12,7 +12,7 @@ const Core = () => {
     <Container maxWidth="md">
       <Stack spacing={3}>
         {commentSection.map((comment) => {
-          return <Comment key={comment.id} onPass={comment} />;
+          return <Comment key={comment.id} comment={comment} />;
         })}
         <AddComment />
       </Stack>

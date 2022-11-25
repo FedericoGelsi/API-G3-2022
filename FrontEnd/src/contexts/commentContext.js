@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { UserContext } from "./UserContext";
+import mock from '../data/data.json';
 const CommentContext = createContext();
 
 class Comment {
@@ -77,13 +78,16 @@ async function updateComment(comment) {
 }
 
 export function CommentProvider({ children }) {
-  const [commentSection, setCommentSection] = useState([
-    new Comment(1, "Hola", 20, new Date(), "alumno@mail.com", 10),
-  ]); //getComments());
+  const [commentSection, setCommentSection] = useState(mock.comments); //getComments());
   const userContext = useContext(UserContext);
   const addComment = (data) => {
     let newComment = createComment(data);
-    setCommentSection([...commentSection, newComment]);
+    setCommentSection([...commentSection, {
+      id: 1,
+      text: "sadasda",
+      createdAt: "Just Now",
+      username: "hola@gmail.com",
+    }]);
   };
 
   const deleteComment = (commentId) => {

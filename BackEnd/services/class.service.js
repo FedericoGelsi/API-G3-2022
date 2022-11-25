@@ -40,6 +40,8 @@ exports.createClass = async function (clase) {
         duration: clase.duration,
         frequency: clase.frequency,
         cost: clase.cost,
+        rating:clase.rating,
+        idProfessor:clase.idProfessor,
         createdDate: new Date()
     })
     
@@ -78,12 +80,13 @@ exports.updateClass = async function (clase) {
     }
     //Edit the Class Object
     
-    oldClass.name = clase.name,
-    oldClass.subject= clase.subject,
-    oldClass.description = clase.description,
-    oldClass.duration= clase.duration,
-    oldClass.frequency= clase.frequency,
+    oldClass.name = clase.name
+    oldClass.subject= clase.subject
+    oldClass.description = clase.description
+    oldClass.duration= clase.duration
+    oldClass.frequency= clase.frequency
     oldClass.cost= clase.cost
+    oldClass.rating= clase.rating
     
     try {
         var savedClass = await oldClass.save()

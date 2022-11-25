@@ -8,25 +8,38 @@ var jwt = require('jsonwebtoken');
 _this = this
 
 // Async function to get the User List
-exports.getUsers = async function (query, page, limit) {
+exports.getUser = async function (user) {
 
-    // Options setup for the mongoose paginate
-    var options = {
-        page,
-        limit
-    }
-    // Try Catch the awaited promise to handle the error 
+    // Creating a new Mongoose Object by using the new keyword
     try {
-        console.log("Query",query)
-        var Users = await User.paginate(query, options)
-        // Return the Userd list that was retured by the mongoose promise
-        return Users;
+        // Find the User 
+        console.log("getting:",user)
 
+        
+        var _details = await UserProfessor.findById({
+            
+            _id: user._id
+            
+        });
+
+        if (!_details) {
+            var _details = await UserStudent.findById({
+                _id: user._id
+            });
+        }
+        
+
+        var token = jwt.sign({
+            id: _details._id
+        }, process.env.SECRET, {
+            expiresIn: 86400 // expires in 24 hours
+        });
+        return {user:_details};
     } catch (e) {
-        // return a Error message describing the reason 
-        console.log("error services",e)
-        throw Error('Error while Paginating Users');
+        // return a Error message describing the reason     
+        throw Error("Error while Login User")
     }
+
 }
 
 exports.createUser = async function (user) {
@@ -110,9 +123,29 @@ exports.updateUser = async function (user) {
     }
     //Edit the User Object
     var hashedPassword = bcrypt.hashSync(user.password, 8);
-    oldUser.name = user.name
-    oldUser.email = user.email
-    oldUser.password = hashedPassword
+
+    if (oldUser.type="student"){
+
+        oldUser.name = user.name,
+        oldUser.lastName = user.lastName,
+        oldUser.email = user.email,
+        oldUser.password= hashedPassword,
+        oldUser.phone= user.phone,
+        oldUser.birthDate= user.birthDate,
+        oldUser.education= user.education,
+        oldUser.password = hashedPassword
+    }
+    else{
+        oldUser.name = user.name,
+        oldUser.lastName = user.lastName,
+        oldUser.email = user.email,
+        oldUser.password= hashedPassword,
+        oldUser.phone= user.phone,
+        oldUser.birthDate= user.birthDate,
+        oldUser.title= user.title,
+        oldUser.experience= user.experience,
+        oldUser.password = hashedPassword
+    }
     try {
         var savedUser = await oldUser.save()
         return savedUser;
@@ -147,7 +180,8 @@ exports.loginUser = async function (user) {
 
         
         var _details = await UserStudent.findOne({
-            email: user.email
+            email: user.email,
+            
             
         });
 

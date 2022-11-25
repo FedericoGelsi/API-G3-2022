@@ -34,6 +34,67 @@ exports.getClassesByName = async function (req, res, next) {
         return res.status(400).json({status: 400, message: e.message});
     }
 }
+exports.getClassesByid = async function (req, res,) {
+
+    // Check the existence of the query parameters, If doesn't exists assign a default value
+    var page = req.query.page ? req.query.page : 1
+    var limit = req.query.limit ? req.query.limit : 10;
+    let filtro= {_id: req.body.id}
+    try {
+        var Classes = await ClassService.getClasses(filtro, page, limit)
+        // Return the Users list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+exports.getClassesByProfessor = async function (req, res, next) {
+
+    // Check the existence of the query parameters, If doesn't exists assign a default value
+    var page = req.query.page ? req.query.page : 1
+    var limit = req.query.limit ? req.query.limit : 10;
+    let filtro= {idProfessor: req.body.professor}
+    try {
+        var Classes = await ClassService.getClasses(filtro, page, limit)
+        // Return the Users list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+
+exports.getClassesByDuration = async function (req, res, next) {
+
+    // Check the existence of the query parameters, If doesn't exists assign a default value
+    var page = req.query.page ? req.query.page : 1
+    var limit = req.query.limit ? req.query.limit : 10;
+    let filtro= {duration: req.body.duration}
+    try {
+        var Classes = await ClassService.getClasses(filtro, page, limit)
+        // Return the Users list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+exports.getClassesByFrecuency = async function (req, res, next) {
+
+    // Check the existence of the query parameters, If doesn't exists assign a default value
+    var page = req.query.page ? req.query.page : 1
+    var limit = req.query.limit ? req.query.limit : 10;
+    let filtro= {frecuency: req.body.frecuency}
+    try {
+        var Classes = await ClassService.getClasses(filtro, page, limit)
+        // Return the Users list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
 
 exports.createClass = async function (req, res) {
     // Req.Body contains the form submit values.
@@ -46,7 +107,9 @@ exports.createClass = async function (req, res) {
             description: req.body.description,
             duration: req.body.duration,
             frequency: req.body.frequency,
-            cost: req.body.cost
+            cost: req.body.cost,
+            rating: req.body.rating,
+            idProfessor: req.body.idProfessor
             
         }
        
@@ -79,7 +142,8 @@ exports.updateClass = async function (req, res) {
         description: req.body.description ? req.body.description: null,
         duration: req.body.duration? req.body.duration: null,
         frequency: req.body.frequency? req.body.frequency: null,
-        cost: req.body.cost? req.body.cost: null
+        cost: req.body.cost? req.body.cost: null,
+        rating: req.body.rating? req.body.rating: null
     }
     try {
         var updatedClass = await ClassService.updateClass(Class)

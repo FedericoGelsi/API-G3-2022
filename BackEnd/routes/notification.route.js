@@ -7,10 +7,11 @@ var Authorization = require('../auth/authorization');
 // Authorize each API with middleware and map to the Controller Functions
 
 
-router.post('/registration', NotificationController.createUser)
-router.get('/',Authorization, NotificationController.getUsers)
-router.put('/', Authorization, NotificationController.updateUser)
-router.delete('/:id', Authorization, NotificationController.removeUser)
+router.post('/registration', NotificationController.createNotification)
+router.get('/',Authorization, NotificationController.getNotifications)
+router.get('/byUser',Authorization, NotificationController.getNotificationsbyUser)
+router.put('/modify', Authorization, NotificationController.updateNotification)
+router.delete('/:id', Authorization, NotificationController.removeNotification)
 
 
 

@@ -5,35 +5,24 @@ var UserService = require('../services/user.service');
 _this = this;
 
 // Async Controller function to get the To do List
-exports.getUsers = async function (req, res, next) {
+exports.getUser = async function (req, res) {
 
-    // Check the existence of the query parameters, If doesn't exists assign a default value
-    var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
+    // Req.Body contains the form submit values.
+    console.log("body",req.body)
+    var User = {
+        _id: req.body.id,
+    }
     try {
-        var Users = await UserService.getUsers({}, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
+        // Calling the Service function with the new object from the Request Body
+        var getUser = await UserService.getUser(User);
+        return res.status(200).json({getUser, message: "Succesfully getUser"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
-        return res.status(400).json({status: 400, message: e.message});
+        return res.status(400).json({status: 400, message: "Invalid id for this user"})
     }
-}
-exports.getUsersByMail = async function (req, res, next) {
 
-    // Check the existence of the query parameters, If doesn't exists assign a default value
-    var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {email: req.body.email}
-    try {
-        var Users = await UserService.getUsers(filtro, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
-    } catch (e) {
-        //Return an Error Response Message with Code and the Error Message.
-        return res.status(400).json({status: 400, message: e.message});
-    }
 }
+
 
 exports.createUser = async function (req, res) {
     // Req.Body contains the form submit values.
@@ -82,19 +71,38 @@ exports.createUser = async function (req, res) {
     }
 }
 
-exports.updateUser = async function (req, res, next) {
+exports.updateUser = async function (req, res) {
 
     // Id is necessary for the update
     if (!req.body.name) {
         return res.status(400).json({status: 400., message: "Name be present"})
     }
 
+    if(req.body.type) {
+        var User = {
+        
+            name: req.body.name ? req.body.name : null,
+            lastName: req.body.lastName ? req.body.lastName : null,
+            email: req.body.email ? req.body.email : null,
+            password: req.body.password ? req.body.password : null,
+            phone: req.body.phone ? req.body.phone : null,
+            birthDate: req.body.birthDate ? req.body.birthDate : null,
+            education: req.body.education ? req.body.education : null
+        }
+    }
     
-    var User = {
-       
-        name: req.body.name ? req.body.name : null,
-        email: req.body.email ? req.body.email : null,
-        password: req.body.password ? req.body.password : null
+    else{
+        var User = {
+        
+            name: req.body.name ? req.body.name : null,
+            lastName: req.body.lastName ? req.body.lastName : null,
+            email: req.body.email ? req.body.email : null,
+            password: req.body.password ? req.body.password : null,
+            phone: req.body.phone ? req.body.phone : null,
+            birthDate: req.body.birthDate ? req.body.birthDate : null,
+            title: req.body.title ? req.body.title : null,
+            experience: req.body.experience ? req.body.experience : null
+        }
     }
     try {
         var updatedUser = await UserService.updateUser(User)

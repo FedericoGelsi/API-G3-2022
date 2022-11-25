@@ -10,6 +10,8 @@ var ClassSchema = new mongoose.Schema({
     duration: String,
     frequency: String,
     cost: Number,
+    rating: Number,
+    idProfessor:String,
     createdDate: Date
 
 });

@@ -7,14 +7,11 @@ var Authorization = require('../auth/authorization');
 
 // Authorize each API with middleware and map to the Controller Functions
 /* GET users listing. */
-router.get('/test', function(req, res) {
-    res.send('Llegaste a la ruta de users');
-  });
+
 router.post('/registration', UserController.createUser)
-router.post('/login/', UserController.loginUser)
-router.get('/',Authorization, UserController.getUsers)
-router.post('/userByMail', Authorization, UserController.getUsersByMail)
-router.put('/', Authorization, UserController.updateUser)
+router.post('/login', UserController.loginUser)
+router.get('/', Authorization, UserController.getUser)
+router.put('/update', Authorization, UserController.updateUser)
 router.delete('/:id', Authorization, UserController.removeUser)
 router.post('/sendMail',MailController.sendEmail)
 

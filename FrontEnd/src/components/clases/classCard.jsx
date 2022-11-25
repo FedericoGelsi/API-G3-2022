@@ -5,20 +5,17 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Chip, Fab } from "@mui/material";
 import { Stack } from "@mui/system";
-import { ShoppingCart } from "@mui/icons-material";
-import ClassConfirmationPopUp from "./classConfirmationPopup";
+import { useNavigate } from "react-router-dom";
 
 export default function CardClase(props) {
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const clase = props.clase;
   let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
+  const navigate = useNavigate();
+  const handleClass = () => {
+    props.variant === "home" ?
+    navigate("/clases/" + clase.id) :
+    navigate("/mis-clases/" + clase.id);
+  };
 
   return (
     <Card>
@@ -44,18 +41,14 @@ export default function CardClase(props) {
         </CardContent>
         <Stack direction="row" justifyContent="space-between" p={1}>
           <Chip label={clase.subject} variant="outlined" color="primary" />
-          {props.variant === "home" && (
-            <Fab
-              color="secondary"
-              size="small"
-              variant="extended"
-              onClick={handleClickOpen}
-            >
-              <Typography variant="button">Contratar</Typography>
-              <ShoppingCart />
-            </Fab>
-          )}
-          <ClassConfirmationPopUp handleClose={handleClose} open={open} />
+          <Fab
+            color="secondary"
+            size="small"
+            variant="extended"
+            onClick={handleClass}
+          >
+            <Typography variant="button">Ver clase</Typography>
+          </Fab>
         </Stack>
       </Stack>
     </Card>

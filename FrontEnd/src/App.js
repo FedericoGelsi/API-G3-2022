@@ -20,13 +20,15 @@ import Clase from "./views/clase";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
 import RegistroAlumno from "./views/registroStudent";
-import mock from "./data/mock.json";
+
 function App() {
   const [user, setUser] = useState();
+  const [token, setToken] = useState();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, token, setToken }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Inicio />} />
@@ -36,18 +38,16 @@ function App() {
             <Route path="/preRegistro" element={<PreRegistro />} />
             <Route path="/recupero" element={<Recupero />} />
             <Route path="/olvido" element={<Olvido />} />
-            <Route path="/clases/:claseId" element={<Clase class={mock.classes[0]}/>} />
             <Route element={<PrivateRoutes />}>
               <Route path="/clases" element={<Clases />}/>
-              
+              <Route path="/clases/:claseId" element={<Clase />} />
               <Route path="/clases/new" element={<RegistroClase />} />
-              <Route path="/mis-clases" element={<MisClases />}/>
-              <Route path="/mis-clases/:claseId" element={<Clase />} />
+              <Route path="/mis-clases" element={<MisClases />} />
+              <Route path="/mis-clases/:claseId" element={<Clase />}/>
               <Route path="/contrataciones" element={<Contrataciones />} />
               <Route path="/notificaciones" element={<Notificaciones />} />
               <Route path="/perfil" element={<Perfil />} />
             </Route>
-
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
         </BrowserRouter>

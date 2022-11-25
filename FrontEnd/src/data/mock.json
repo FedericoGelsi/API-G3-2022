@@ -79,12 +79,14 @@
             "title": "Experiencia 2",
             "description": "Descripcion exp 2"
           }
-        ]
+        ],
+        "avatar": "/"
       },
       "frec": "Semanal",
       "price": "20 USD",
       "type": "individual",
       "image": "",
+      "rating": 4,
       "description": "Sin descripcion"
     },
     {
@@ -109,12 +111,14 @@
             "title": "Experiencia 2",
             "description": "Descripcion exp 2"
           }
-        ]
+        ],
+        "avatar": "/"
       },
       "frec": "Semanal",
       "price": "20 USD",
       "type": "individual",
       "image": "",
+      "rating": 4,
       "description": "Sin descripcion"
     }
   ],
@@ -148,7 +152,8 @@
         "price": "20 USD",
         "type": "individual",
         "image": "",
-        "description": "Sin descripcion"
+        "description": "Sin descripcion",
+        "rating": 4
       },
       "student": {
         "id": 2,
@@ -203,7 +208,8 @@
         "price": "20 USD",
         "type": "individual",
         "image": "",
-        "description": "Sin descripcion"
+        "description": "Sin descripcion",
+        "rating": 4
       },
       "student": {
         "id": 2,
@@ -258,7 +264,8 @@
         "price": "20 USD",
         "type": "individual",
         "image": "",
-        "description": "Sin descripcion"
+        "description": "Sin descripcion",
+        "rating": 4
       },
       "student": {
         "id": 2,
@@ -313,7 +320,8 @@
         "price": "20 USD",
         "type": "individual",
         "image": "",
-        "description": "Sin descripcion"
+        "description": "Sin descripcion",
+        "rating": 4
       },
       "student": {
         "id": 2,

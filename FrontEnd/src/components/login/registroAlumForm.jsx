@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useState } from "react";
+import  { useState,useContext } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,10 +13,10 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+import * as React from 'react';
+import { POST } from "../../hooks/apiCrud";
+import { UserContext } from "../../contexts/UserContext";
 
 /////////////////////////////////////////////////////////////
 let easing = [0.6, -0.05, 0.01, 0.99];
@@ -30,13 +30,17 @@ const animate = {
   },
 };
 
-const RegistroFormProf = ({ setAuth }) => {
+
+
+const RegistroFormAlum = ({  }) => {
+
+  const {setToken } = useContext(UserContext);
   const navigate = useNavigate();
   
   const [showPassword, setShowPassword] = useState(false);
 
   const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
+    name: Yup.string()
       .min(2, "valor muy corto")
       .max(50, "valor muy largo")
       .required("Es necesario completar este campo"),
@@ -50,31 +54,50 @@ const RegistroFormProf = ({ setAuth }) => {
     password: Yup.string()
     .min(8,"valor muy corto")
     .required("Es necesario completar este campo"),
-    telefono: Yup.string()
+    phone: Yup.string()
       .required("Es necesario completar este campo"),
-    bornDate: Yup.string().required("Es necesario completar este campo"),
-    estudios: Yup.string().required("Es necesario completar este campo"),
+    birthDate: Yup.string().required("Es necesario completar este campo"),
 
   });
+
+
+  const postUser = (values) => {
+    return POST("/users/registration", values);
+  };
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
+      type:"student",
+      name: "",
       lastName: "",
       email: "",
       password: "",
-      telefono:"",
-      bornDate:"",
-      estudios:""
+      phone:11,
+      birthDate:"",
+      education:"",
+      
     },
     validationSchema: SignupSchema,
-    onSubmit: () => {
+    onSubmit: (values, actions) => {
       setTimeout(() => {
-        setAuth(true);
-        navigate("/", { replace: true });
+        handleRegister(values);
+        
+        actions.setSubmitting(false);
       }, 2000);
     },
   });
+
+
+  const handleRegister = (values) => {
+    const registerData = postUser(values);
+    if (registerData) {
+      setToken(registerData.token);
+      alert("Se registro con Exito")
+      navigate("/");
+    } else {
+      alert("No se logro Registrar");
+    }
+  };
 
   const estudiosCbx = [
     'Primario Incompleto', 
@@ -103,9 +126,9 @@ const RegistroFormProf = ({ setAuth }) => {
             <TextField
               fullWidth
               label="Nombre/s"
-              {...getFieldProps("firstName")}
-              error={Boolean(touched.firstName && errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
+              {...getFieldProps("name")}
+              error={Boolean(touched.name && errors.name)}
+              helperText={touched.name && errors.name}
             />
 
             <TextField
@@ -135,27 +158,27 @@ const RegistroFormProf = ({ setAuth }) => {
             <TextField
               fullWidth
               type="tel"
-              label="telefono"
-              {...getFieldProps("telefono")}
-              error={Boolean(touched.telefono && errors.telefono)}
-              helperText={touched.telefono && errors.telefono}
+              label="Telefono"
+              {...getFieldProps("phone")}
+              error={Boolean(touched.phone && errors.phone)}
+              helperText={touched.phone && errors.phone}
             />
 
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                fullWidth
-                label="Fecha de Nacimiento"
-                openTo="year"
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
+            <TextField
+              fullWidth
+              type="birthDate"
+              label="Fecha de Nacimiento"
+              placeholder="mm/dd/aaaa"
+              {...getFieldProps("birthDate")}
+              error={Boolean(touched.birthDate && errors.birthDate)}
+              helperText={touched.birthDate && errors.birthDate}
+            />
 
             <Autocomplete              
               fullWidth
-              label="Estudios" 
               options={estudiosCbx}
               renderInput={(params) => <TextField {...params} label="Estudios" 
-              {...getFieldProps("estudios")}
+              {...getFieldProps("education")}
               />}
             />
 
@@ -207,4 +230,4 @@ const RegistroFormProf = ({ setAuth }) => {
   );
 };
 
-export default RegistroFormProf;
+export default RegistroFormAlum;

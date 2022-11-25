@@ -60,6 +60,7 @@ const LoginForm = () => {
     onSubmit: (values, actions) => {
       setTimeout(() => {
         handleLogin(values);
+        
         actions.setSubmitting(false);
       }, 1000);
     },

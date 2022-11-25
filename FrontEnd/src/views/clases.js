@@ -3,11 +3,16 @@ import CardClase from "../components/clases/classCard";
 import GridPage from "../components/GridPage";
 import SearchFilter from "../components/clases/SearchFilter";
 import mock from "../data/mock.json";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 function Clases(props) {
+  const {token} = useContext(UserContext);
   function getClasses() {
     return mock.classes;
   }
+
+  console.log(token);
 
   const classes = getClasses();
 

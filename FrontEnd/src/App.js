@@ -23,11 +23,12 @@ import RegistroAlumno from "./views/registroStudent";
 
 function App() {
   const [user, setUser] = useState();
+  const [token, setToken] = useState();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, token, setToken }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Inicio />} />

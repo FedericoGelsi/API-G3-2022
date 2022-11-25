@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
-import mock from "../../data/mock.json";
 import { UserContext } from "../../contexts/UserContext";
 import {
   Box,
@@ -17,6 +16,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { POST } from "../../hooks/apiCrud";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -30,7 +30,7 @@ const animate = {
 };
 
 const LoginForm = () => {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser, setToken } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -44,18 +44,8 @@ const LoginForm = () => {
       .required("Es necesario completar este campo"),
   });
 
-  const getUser = (mail) => {
-    const userLogin = mock.loginUsers.find((user) => user.mail === mail);
-    if (userLogin) {
-      let userProfile = mock.users.find(
-        (userProfile) => userProfile.mail === mail
-      );
-      if (!userProfile) {
-        return undefined;
-      }
-      return userProfile;
-    }
-    return undefined;
+  const getLogin = (values) => {
+    return POST("/users/login", values);
   };
 
   const formik = useFormik({
@@ -69,15 +59,16 @@ const LoginForm = () => {
       setTimeout(() => {
         handleLogin(values);
         actions.setSubmitting(false);
-      }, 2000);
+      }, 1000);
     },
   });
 
   const handleLogin = (values) => {
-    const user = getUser(values.email);
-    if (user && user.password === values.password) {
-      setUser(user);
-      navigate(user.role === "professor" ? "/mis-clases" : "/clases");
+    const loginData = getLogin(values);
+    if (loginData) {
+      setToken(loginData.loginUser.token);
+      setUser(loginData.loginUser.user);
+      navigate(user.type === "professor" ? "/mis-clases" : "/clases");
     } else {
       alert("Usuario o Contrasenia inconrrecta.");
     }

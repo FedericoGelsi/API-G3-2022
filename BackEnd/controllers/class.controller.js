@@ -24,7 +24,7 @@ exports.getClassesByName = async function (req, res, next) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {name: req.body.name}
+    let filtro= {name: req.params.name}
     try {
         var Classes = await ClassService.getClasses(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
@@ -39,7 +39,7 @@ exports.getClassesByid = async function (req, res,) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {_id: req.body.id}
+    let filtro= {_id: req.params.id}
     try {
         var Classes = await ClassService.getClasses(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
@@ -54,7 +54,7 @@ exports.getClassesByProfessor = async function (req, res, next) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {idProfessor: req.body.professor}
+    let filtro= {idProfessor: req.params.professor}
     try {
         var Classes = await ClassService.getClasses(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
@@ -70,7 +70,7 @@ exports.getClassesByDuration = async function (req, res, next) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {duration: req.body.duration}
+    let filtro= {duration: req.params.duration}
     try {
         var Classes = await ClassService.getClasses(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
@@ -85,7 +85,7 @@ exports.getClassesByFrecuency = async function (req, res, next) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {frecuency: req.body.frecuency}
+    let filtro= {frecuency: req.params.frecuency}
     try {
         var Classes = await ClassService.getClasses(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.

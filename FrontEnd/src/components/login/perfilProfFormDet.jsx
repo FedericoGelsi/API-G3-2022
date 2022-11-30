@@ -18,10 +18,10 @@ export const PerfilDetalleProf = (props) => {
     firstName: 'Juan',
     lastName: 'Lopez',
     email: 'demo@profesor.com',
-    telefono: '',
-    bornDate:'11/03/1980',
-    titulo: 'Ing Quimico',
-    experiencia: '2 anios en la UBA'
+    phone: '',
+    birthdate:'11/03/1980',
+    title: 'Ing Quimico',
+    experience: '2 anios en la UBA'
 
   });
   const userContext = useContext(UserContext);
@@ -117,8 +117,8 @@ export const PerfilDetalleProf = (props) => {
             >
               <TextField
                 fullWidth
-                label="Telefono"
-                name="telefono"
+                label="phone"
+                name="phone"
                 onChange={handleChange}
                 type="number"
                 value={userContext.user.phone}
@@ -132,8 +132,8 @@ export const PerfilDetalleProf = (props) => {
             >
               <TextField
                 fullWidth
-                label="Titulo"
-                name="titulo"
+                label="title"
+                name="title"
                 onChange={handleChange}
                 required
                 value={userContext.user.degree}
@@ -147,11 +147,11 @@ export const PerfilDetalleProf = (props) => {
             >
               <TextField
                 fullWidth
-                label="Experiencia"
-                name="experiencia"
+                label="experience"
+                name="experience"
                 onChange={handleChange}
                 required
-                value={values.experiencia}
+                value={values.experience}
                 variant="outlined"
               />
             </Grid>

@@ -14,12 +14,12 @@ import { UserContext } from "../../contexts/UserContext";
 
 export const PerfilDetalleAlum = (props) => {
   const [values, setValues] = useState({
-    firstName: "Juan",
+    name: "Juan",
     lastName: "Lopez",
     email: "demo@profesor.com",
-    telefono: "",
-    bornDate: "11/03/1980",
-    estudios: "Ing Quimico",
+    phone: "",
+    birthdate: "11/03/1980",
+    education: "Ing Quimico",
   });
 
   const userContex = useContext(UserContext);
@@ -43,10 +43,10 @@ export const PerfilDetalleAlum = (props) => {
                 fullWidth
                 helperText=""
                 label="Nombre/s"
-                name="firstName"
+                name="name"
                 onChange={handleChange}
                 required
-                value={userContex.user.firstname}
+                value={userContex.user.name}
                 variant="outlined"
               />
             </Grid>
@@ -86,8 +86,8 @@ export const PerfilDetalleAlum = (props) => {
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Telefono"
-                name="telefono"
+                label="phone"
+                name="phone"
                 onChange={handleChange}
                 type="number"
                 value={userContex.user.phone}

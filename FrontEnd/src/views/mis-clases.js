@@ -2,34 +2,54 @@ import { Grid, Typography, Fab } from "@mui/material";
 import CardClase from "../components/clases/classCard";
 import GridPage from "../components/GridPage";
 import mock from "../data/mock.json";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { GET } from "../hooks/apiCrud";
+
 function MisClases(props) {
   const userContext = useContext(UserContext);
 
+  const [classes, setClasses] = useState();
+
   const getStudentContracts = () => {
-    return mock.contracts;
-    return mock.contracts.filter((_) => {
-      return _.student.id === userContext.user.id;
+    const studentContracts = GET(
+      "/contracting/" +
+        new URLSearchParams({
+          studentId: userContext.user.id,
+        }),
+      userContext.token
+    ).then((response) => {
+      const contracts = response;
+      console.log(contracts);
+      // GET("/class", userContext.token).then((response) => {
+      //   setClasses(response);
+      // });
     });
   };
 
   const getProfessorContracts = () => {
-    return mock.contracts;
-    return mock.contracts.filter((_) => {
-      return _.class.professor.id === userContext.user.id;
+    return GET(
+      "/class/byProfessor",
+      {
+        professor: userContext.user.id,
+      },
+      userContext.token
+    ).then((response) => {
+      setClasses(response);
     });
   };
 
   const getMyClasses = () => {
-    return userContext.user.type === "student"
-      ? getStudentContracts()
-      : getProfessorContracts();
+    // return userContext.user.type === "student"
+    //   ? getStudentContracts()
+    //   : getProfessorContracts();
+
+    return getStudentContracts();
   };
 
-  const classes = getMyClasses();
+  const classesData = getMyClasses();
   const navigate = useNavigate();
 
   const handleNewClass = () => {
@@ -55,7 +75,7 @@ function MisClases(props) {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 2, sm: 8, md: 12 }}
       >
-        {classes.map((_, index) => (
+        {classesData.map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
             <CardClase clase={_.class} />
           </Grid>

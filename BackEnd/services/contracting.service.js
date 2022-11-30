@@ -33,8 +33,6 @@ exports.createContracting = async function (contracting) {
     
 
     var newContrating = new Contracting({
-        
-        
         idClass: contracting.idClass,
         idStudent: contracting.idStudent,
         status: contracting.status,

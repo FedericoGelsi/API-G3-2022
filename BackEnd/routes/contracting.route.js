@@ -9,8 +9,8 @@ var Authorization = require('../auth/authorization');
 
 router.post('/registration', ContractingController.createContracting)
 router.get('/',Authorization, ContractingController.getContractings)
-router.get('/byClass',Authorization, ContractingController.getContractingsByClass)
-router.get('/byStudent',Authorization, ContractingController.getContractingsByStudent)
+router.get('/:classId',Authorization, ContractingController.getContractingsByClass)
+router.get('/:studentId',Authorization, ContractingController.getContractingsByStudent)
 router.put('/modify', Authorization, ContractingController.updateContracting)
 
 

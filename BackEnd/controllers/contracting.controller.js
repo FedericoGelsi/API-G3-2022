@@ -24,7 +24,8 @@ exports.getContractingsByStudent = async function (req, res) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {idStudent: req.body.student}
+    console.log(req.params);
+    let filtro= {idStudent: req.params.studentId}
     try {
         var Contracting = await ContractingService.getContractings(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
@@ -40,7 +41,7 @@ exports.getContractingsByClass = async function (req, res) {
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {idClass: req.body.class}
+    let filtro= {idClass: req.params.classId}
     try {
         var Contracting = await ContractingService.getContractings(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.

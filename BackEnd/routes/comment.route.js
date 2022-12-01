@@ -8,7 +8,7 @@ var Authorization = require('../auth/authorization');
 
 router.post('/creation', CommentController.createComment)
 router.get('/',Authorization, CommentController.getComments)
-router.get('/byUser',Authorization, CommentController.getCommentsbyUser)
+router.post('/byUser',Authorization, CommentController.getCommentsbyUser)
 router.put('/modify', Authorization, CommentController.updateComment)
 router.delete('/:id', Authorization, CommentController.removeComment)
 

@@ -32,7 +32,8 @@ exports.createContracting = async function (contracting) {
     // Creating a new Mongoose Object by using the new keyword
     
 
-    var newContrating = new Contracting({
+    var newContracting = new Contracting({
+        
         idClass: contracting.idClass,
         idStudent: contracting.idStudent,
         status: contracting.status,
@@ -43,7 +44,7 @@ exports.createContracting = async function (contracting) {
 
     try {
         // Saving the Class 
-        var savedContracting = await newContrating.save();
+        var savedContracting = await newContracting.save();
         var token = jwt.sign({
             id: savedContracting._id
         }, process.env.SECRET, {

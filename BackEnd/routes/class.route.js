@@ -9,11 +9,11 @@ var Authorization = require('../auth/authorization');
 
 router.post('/registration', ClassController.createClass)
 router.get('/',Authorization, ClassController.getClasses)
-router.get('/:professor',Authorization, ClassController.getClassesByProfessor)
-router.get('/byname',Authorization, ClassController.getClassesByName)
-router.get('/byId',Authorization, ClassController.getClassesByid)
-router.get('/byDuration',Authorization, ClassController.getClassesByDuration)
-router.get('/byFrecuency',Authorization, ClassController.getClassesByFrecuency)
+router.post('/byProfessor',Authorization, ClassController.getClassesByProfessor)
+router.post('/byName',Authorization, ClassController.getClassesByName)
+router.post('/byId',Authorization, ClassController.getClassesByid)
+router.post('/byDuration',Authorization, ClassController.getClassesByDuration)
+router.post('/byFrecuency',Authorization, ClassController.getClassesByFrecuency)
 router.put('/modify', Authorization, ClassController.updateClass)
 router.delete('/:id', Authorization, ClassController.removeClass)
 

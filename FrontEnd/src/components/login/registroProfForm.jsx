@@ -60,7 +60,7 @@ const RegistroFormProf = ({  }) => {
       name: "",
       lastName: "",
       email: "",
-      password: "",
+      password: "", 
       phone:11,
       birthDate:"",
       title:"",

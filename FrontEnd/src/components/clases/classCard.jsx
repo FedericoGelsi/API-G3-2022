@@ -8,6 +8,7 @@ import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 export default function CardClase(props) {
+  
   const clase = props.clase;
   let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
   const navigate = useNavigate();

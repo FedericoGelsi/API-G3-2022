@@ -6,7 +6,8 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { GET } from "../hooks/apiCrud";
+import { POST,GET } from "../hooks/apiCrud";
+
 
 function MisClases(props) {
   const userContext = useContext(UserContext);
@@ -14,9 +15,9 @@ function MisClases(props) {
   const [classes, setClasses] = useState();
 
   const getStudentContracts = () => {
-    const studentContracts = GET(
-      "/contracting/" +
-        new URLSearchParams({
+    const studentContracts = POST(
+      "/contracting/byStudent" ,
+        ({
           studentId: userContext.user._id,
         }),
       userContext.token
@@ -28,26 +29,29 @@ function MisClases(props) {
       // });
     });
   };
+  
+  
 
-  const getProfessorContracts = () => {
-    GET(
-      "/class/" +
-      new URLSearchParams({
-        professor: userContext.user._id,
-      }),
+  const getProfessorClasses = () => {
+    POST(
+      "/class/byProfessor",
+      ({ professor: userContext.user._id}),
       userContext.token
+      
     ).then((response) => {
       console.log(response);
       setClasses(response);
     });
   };
 
+  
+
   const getMyClasses = () => {
     // return userContext.user.type === "student"
     //   ? getStudentContracts()
     //   : getProfessorContracts();
 
-    return getProfessorContracts();
+    return getProfessorClasses();
   };
 
   const classesData = getMyClasses();

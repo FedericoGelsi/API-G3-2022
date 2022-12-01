@@ -9,7 +9,7 @@ var Authorization = require('../auth/authorization');
 
 router.post('/registration', NotificationController.createNotification)
 router.get('/',Authorization, NotificationController.getNotifications)
-router.get('/byUser',Authorization, NotificationController.getNotificationsbyUser)
+router.post('/byUser',Authorization, NotificationController.getNotificationsbyUser)
 router.put('/modify', Authorization, NotificationController.updateNotification)
 router.delete('/:id', Authorization, NotificationController.removeNotification)
 

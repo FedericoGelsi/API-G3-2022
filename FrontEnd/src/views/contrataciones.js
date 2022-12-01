@@ -4,6 +4,7 @@ import GridPage from "../components/GridPage";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import mock from "../data/mock.json";
+import { POST,GET } from "../hooks/apiCrud";
 
 function Contrataciones(props) {
   const userContext = useContext(UserContext);
@@ -13,8 +14,31 @@ function Contrataciones(props) {
   };
 
   const getUserContracts = () => {
-    return mock.contracts;
+    POST(
+      "/contracting/byStudent" ,
+        ({
+          studentId: userContext.user._id,
+        }),
+      userContext.token
+    ).then((response) => {
+       contracts = response;
+    });
+    return contracts;
   };
+  
+  const getClassbyId = () => {
+    POST(
+      "/class/byId" ,
+        ({
+          id: getUserContracts().idClass,
+        }),
+      userContext.token
+    ).then((response) => {
+       classes = response;
+    });
+    return classes;
+  };
+  
 
   const getContracts = () => {
     return userContext.user.type === "professor"
@@ -23,6 +47,7 @@ function Contrataciones(props) {
   };
 
   const contracts = getContracts();
+  const classes=getClassbyId();
 
   return (
     <GridPage>

@@ -13,23 +13,24 @@ function MisClases(props) {
 
   const [classes, setClasses] = useState();
 
-  const getStudentContracts = () => {
-    const studentContracts = POST(
+  const filterByClassId = (classes, contracts) => {
+    return classes.filter(({ idClass: id1 }) => !contracts.some(({ idClass: id2 }) => id2 === id1));
+  }
+  const getStudentClasses = async () => {
+    const studentContracts = await POST(
       "/contracting/byStudent",
       {
         studentId: userContext.user._id,
       },
       userContext.token
     ).then(async (response) => {
-      const contracts = response;
-      console.log(contracts);
-      let classes = [];
-      classes = await GET("/class", userContext.token).then((response) => {
+      const contracts = response.data.docs;
+      let classes = await GET("/class", userContext.token).then((response) => {
         return response.data.docs;
       });
-
-      return classes.filter();
+      return filterByClassId(classes, contracts);
     });
+    return studentContracts;
   };
 
   const getProfessorClasses = async () => {
@@ -46,11 +47,9 @@ function MisClases(props) {
   };
 
   const getMyClasses = () => {
-    // return userContext.user.type === "student"
-    //   ? getStudentContracts()
-    //   : getProfessorContracts();
-
-    return getProfessorClasses();
+    return userContext.user.type === "student"
+      ? getStudentClasses()
+      : getProfessorClasses();
   };
 
   const navigate = useNavigate();

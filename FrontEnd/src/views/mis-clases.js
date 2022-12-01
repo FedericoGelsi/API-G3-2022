@@ -17,7 +17,7 @@ function MisClases(props) {
     const studentContracts = GET(
       "/contracting/" +
         new URLSearchParams({
-          studentId: userContext.user.id,
+          studentId: userContext.user._id,
         }),
       userContext.token
     ).then((response) => {
@@ -30,13 +30,14 @@ function MisClases(props) {
   };
 
   const getProfessorContracts = () => {
-    return GET(
-      "/class/byProfessor",
-      {
-        professor: userContext.user.id,
-      },
+    GET(
+      "/class/" +
+      new URLSearchParams({
+        professor: userContext.user._id,
+      }),
       userContext.token
     ).then((response) => {
+      console.log(response);
       setClasses(response);
     });
   };
@@ -46,7 +47,7 @@ function MisClases(props) {
     //   ? getStudentContracts()
     //   : getProfessorContracts();
 
-    return getStudentContracts();
+    return getProfessorContracts();
   };
 
   const classesData = getMyClasses();

@@ -6,8 +6,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { POST,GET } from "../hooks/apiCrud";
-
+import { POST, GET } from "../hooks/apiCrud";
 
 function MisClases(props) {
   const userContext = useContext(UserContext);
@@ -16,35 +15,35 @@ function MisClases(props) {
 
   const getStudentContracts = () => {
     const studentContracts = POST(
-      "/contracting/byStudent" ,
-        ({
-          studentId: userContext.user._id,
-        }),
+      "/contracting/byStudent",
+      {
+        studentId: userContext.user._id,
+      },
       userContext.token
-    ).then((response) => {
+    ).then(async (response) => {
       const contracts = response;
       console.log(contracts);
-      // GET("/class", userContext.token).then((response) => {
-      //   setClasses(response);
-      // });
+      let classes = [];
+      classes = await GET("/class", userContext.token).then((response) => {
+        return response.data.docs;
+      });
+
+      return classes.filter();
     });
   };
-  
-  
 
-  const getProfessorClasses = () => {
-    POST(
+  const getProfessorClasses = async () => {
+    let classes = await POST(
       "/class/byProfessor",
-      ({ professor: userContext.user._id}),
+      { professor: userContext.user._id },
       userContext.token
-      
-    ).then((response) => {
-      console.log(response);
-      setClasses(response);
-    });
+    )
+      .then((response) => {
+        return response.data.docs;
+      })
+      .catch((error) => console.error(error));
+    return classes;
   };
-
-  
 
   const getMyClasses = () => {
     // return userContext.user.type === "student"
@@ -54,12 +53,26 @@ function MisClases(props) {
     return getProfessorClasses();
   };
 
-  const classesData = getMyClasses();
   const navigate = useNavigate();
 
   const handleNewClass = () => {
     navigate("/clases/new");
   };
+
+  getMyClasses().then(
+    function (classesData) {
+      setClasses(
+        classesData.map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <CardClase clase={_} />
+          </Grid>
+        ))
+      );
+    },
+    function (error) {
+      console.error("Could not get classes.", error);
+    }
+  );
 
   return (
     <GridPage>
@@ -80,11 +93,7 @@ function MisClases(props) {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 2, sm: 8, md: 12 }}
       >
-        {classesData.map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <CardClase clase={_.class} />
-          </Grid>
-        ))}
+        {classes}
       </Grid>
     </GridPage>
   );

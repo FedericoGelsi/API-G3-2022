@@ -8,14 +8,13 @@ import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 export default function CardClase(props) {
-  
   const clase = props.clase;
   let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
   const navigate = useNavigate();
   const handleClass = () => {
-    props.variant === "home" ?
-    navigate("/clases/" + clase.id) :
-    navigate("/mis-clases/" + clase.id);
+    props.variant === "home"
+      ? navigate("/clases/" + clase._id)
+      : navigate("/mis-clases/" + clase._id);
   };
 
   return (
@@ -31,7 +30,7 @@ export default function CardClase(props) {
         <CardContent>
           <Typography variant="subtitle2" color="secondary">
             Profesor -{" "}
-            {clase.professor.firstname + " " + clase.professor.lastname}
+            {/* {clase.professor.firstname + " " + clase.professor.lastname} */}
           </Typography>
           <Typography variant="h4" color="text.primary">
             {clase.name}

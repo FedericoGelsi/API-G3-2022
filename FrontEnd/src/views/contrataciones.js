@@ -8,21 +8,23 @@ import { POST,GET } from "../hooks/apiCrud";
 
 function Contrataciones(props) {
   const userContext = useContext(UserContext);
+  
+  const [contracts, setContracts] = useState();
 
   const getProfessorContracts = () => {
     return mock.contracts;
   };
 
-  const getUserContracts = () => {
-    POST(
-      "/contracting/byStudent" ,
-        ({
-          studentId: userContext.user._id,
-        }),
+  const getStudentContracts = async () => {
+    let contracts = await POST(
+      "/contracting/byStudent",
+      { studentId: userContext.user._id },
       userContext.token
-    ).then((response) => {
-       contracts = response;
-    });
+    )
+      .then((response) => {
+        return response.data.docs;
+      })
+      .catch((error) => console.error(error));
     return contracts;
   };
   
@@ -43,11 +45,23 @@ function Contrataciones(props) {
   const getContracts = () => {
     return userContext.user.type === "professor"
       ? getProfessorContracts()
-      : getUserContracts();
+      : getStudentContracts();
   };
 
-  const contracts = getContracts();
-  const classes=getClassbyId();
+  getContracts().then(
+    function (contractsData) {
+      setContracts(
+        contractsData.map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <CardContratacion contract={_} />
+          </Grid>
+        ))
+      );
+    },
+    function (error) {
+      console.error("Could not get contracts.", error);
+    }
+  );
 
   return (
     <GridPage>
@@ -55,11 +69,7 @@ function Contrataciones(props) {
         <Typography variant="h4">Contrataciones</Typography>
       </Grid>
       <Grid item container direction="column" spacing={{ xs: 2, md: 2 }}>
-        {contracts.map((_, index) => (
-          <Grid item key={index}>
-            <CardContratacion contratacion={_} />
-          </Grid>
-        ))}
+        {contracts}
       </Grid>
     </GridPage>
   );

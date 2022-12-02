@@ -8,14 +8,16 @@ import { Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { POST, GET } from "../hooks/apiCrud";
 
-function MisClases(props) {
+async function MisClases(props) {
   const userContext = useContext(UserContext);
 
   const [classes, setClasses] = useState();
 
   const filterByClassId = (classes, contracts) => {
-    return classes.filter(({ idClass: id1 }) => !contracts.some(({ idClass: id2 }) => id2 === id1));
-  }
+    return classes.filter(
+      ({ idClass: id1 }) => !contracts.some(({ idClass: id2 }) => id2 === id1)
+    );
+  };
   const getStudentClasses = async () => {
     const studentContracts = await POST(
       "/contracting/byStudent",
@@ -23,14 +25,17 @@ function MisClases(props) {
         studentId: userContext.user._id,
       },
       userContext.token
-    ).then(async (response) => {
-      const contracts = response.data.docs;
-      let classes = await GET("/class", userContext.token).then((response) => {
+    )
+      .then((response) => {
         return response.data.docs;
-      });
-      return filterByClassId(classes, contracts);
-    });
-    return studentContracts;
+      })
+      .catch((error) => console.error(error));
+    let classes = await GET("/class", userContext.token)
+      .then((response) => {
+        return response.data.docs;
+      })
+      .catch((error) => console.error(error));
+    return filterByClassId(classes, studentContracts);
   };
 
   const getProfessorClasses = async () => {
@@ -58,7 +63,7 @@ function MisClases(props) {
     navigate("/clases/new");
   };
 
-  getMyClasses().then(
+  await getMyClasses().then(
     function (classesData) {
       setClasses(
         classesData.map((_, index) => (

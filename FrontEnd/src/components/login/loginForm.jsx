@@ -67,7 +67,7 @@ const LoginForm = () => {
   });
 
   const handleLogin = async (values) => {
-    getLogin(values).then((loginData) => {
+    await getLogin(values).then((loginData) => {
       if (loginData) {
         setToken(loginData.loginUser.token);
         setUser(loginData.loginUser.user);

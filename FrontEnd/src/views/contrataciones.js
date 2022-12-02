@@ -1,11 +1,10 @@
 import CardContratacion from "../components/contrataciones/CardContratacion";
 import { Grid, Typography } from "@mui/material";
 import GridPage from "../components/GridPage";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import mock from "../data/mock.json";
-import { POST,GET } from "../hooks/apiCrud";
-
+import { POST } from "../hooks/apiCrud";
 function Contrataciones(props) {
   const userContext = useContext(UserContext);
   
@@ -28,17 +27,16 @@ function Contrataciones(props) {
     return contracts;
   };
   
-  const getClassbyId = () => {
-    POST(
+  const getClassbyId = async (idClass) => {
+    return await POST(
       "/class/byId" ,
         ({
-          id: getUserContracts().idClass,
+          id: idClass,
         }),
       userContext.token
     ).then((response) => {
-       classes = response;
+       return response.data.docs;
     });
-    return classes;
   };
   
 
@@ -50,6 +48,7 @@ function Contrataciones(props) {
 
   getContracts().then(
     function (contractsData) {
+      console.log(contractsData);
       setContracts(
         contractsData.map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>

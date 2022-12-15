@@ -1,14 +1,29 @@
 import { Grid } from "@mui/material";
+import { useContext, useState } from "react";
 import { useParams, useResolvedPath } from "react-router-dom";
 import BackButtonBar from "../components/clases/backButtonBar";
 import VistaClase from "../components/clases/classView/classView";
 import GridPage from "../components/GridPage";
-import mock from "../data/mock.json";
+import { POST } from "../hooks/apiCrud";
+import { UserContext } from "../contexts/UserContext";
 
 function Clase() {
   let params = useParams();
+  const userContext = useContext(UserContext);
+  const [clase, setClase] = useState();
 
-  let clase = mock.classes[params.claseId - 1];
+  function getClass(claseId) {
+    console.log(claseId);
+    POST("/class/byId", { id: claseId }, userContext.token)
+      .then((response) => {
+        setClase(response.data.docs);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  getClass(params.claseId);
 
   let { pathname } = useResolvedPath();
   let variant = pathname.includes("mis-clases") ? "view-only" : "";
@@ -18,7 +33,7 @@ function Clase() {
         <BackButtonBar />
       </Grid>
       <Grid item>
-        <VistaClase clase={clase} variant={variant}/>
+        <VistaClase clase={clase} variant={variant} />
       </Grid>
     </GridPage>
   );

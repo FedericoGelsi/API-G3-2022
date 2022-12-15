@@ -19,10 +19,11 @@ export default function VistaClase(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  
-  const clase = props.clase;
 
-  let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
+  const clase = props.clase;
+  console.log(clase);
+
+  let cardImageUrl = "/img/" + "default.png";
 
   return (
     <Card>

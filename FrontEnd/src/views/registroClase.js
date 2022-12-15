@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 //////////////////////////////////
 
-
 const HeadingStyle = styled(Box)({
   textAlign: "center",
 });
@@ -39,32 +38,28 @@ const fadeInUp = {
   },
 };
 
-
 const RegistroClase = ({ setAuth }) => {
-    return (
-        <GridPage>
-            
-               
-                    <ContentStyle>
-                    
-                        <HeadingStyle component={motion.div} {...fadeInUp}>   
-                                <Typography  variant="h5"  sx={{color: "text.primary" , mb:2, textAlign:"left"}} >
-                                    Datos necesarios para una Nueva Clase:
-                                </Typography>        
-                            <Divider sx={{ my: 0,mb:3 ,md:256}} component={motion.div} {...fadeInUp}>
-                                
-                            </Divider>
-                        </HeadingStyle>
+  return (
+    <GridPage>
+      <ContentStyle>
+        <HeadingStyle component={motion.div} {...fadeInUp}>
+          <Typography
+            variant="h5"
+            sx={{ color: "text.primary", mb: 2, textAlign: "left" }}
+          >
+            Datos necesarios para una Nueva Clase:
+          </Typography>
+          <Divider
+            sx={{ my: 0, mb: 3, md: 256 }}
+            component={motion.div}
+            {...fadeInUp}
+          ></Divider>
+        </HeadingStyle>
 
+        <RegistroClaseForm setAuth={setAuth} />
+      </ContentStyle>
+    </GridPage>
+  );
+};
 
-                        <RegistroClaseForm setAuth={setAuth} />
-
-                        
-                    </ContentStyle>
-              
-           
-        </GridPage>
-    );
-  };
-  
-export default RegistroClase
+export default RegistroClase;

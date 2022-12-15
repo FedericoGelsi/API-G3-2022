@@ -9,19 +9,23 @@ import {
   FormLabel,
   Checkbox,
   FormGroup,
-  Rating
+  Rating,
+  Grid,
 } from "@mui/material";
 import * as React from "react";
+import { GET } from "../../hooks/apiCrud";
+import CardClase from "./classCard";
 import SearchSelectSubject from "./SearchSelectSubject";
+import { useState } from "react";
 
 function SearchFilter(props) {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     unica: true,
     semanal: false,
     mensual: false,
   });
 
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = useState(2);
 
   const handleChange = (event) => {
     setState({
@@ -35,8 +39,10 @@ function SearchFilter(props) {
   return (
     <Stack direction="column" spacing={2}>
       <TextField id="outlined-search" label="Buscar" type="search" />
-      <Button variant="contained">Buscar</Button>
-      <SearchSelectSubject/>
+      <Button onClick={props.getClasses} variant="contained">
+        Buscar
+      </Button>
+      <SearchSelectSubject />
       <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
         <FormGroup>
           <FormLabel id="demo-radio-buttons-group-label">Tipo</FormLabel>

@@ -42,6 +42,7 @@ exports.getClassesByid = async function (req, res,) {
     let filtro= {_id: req.body.id}
     try {
         var Classes = await ClassService.getClasses(filtro, page, limit)
+        console.log(Classes);
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: Classes, message: "Succesfully Classes Recieved"});
     } catch (e) {

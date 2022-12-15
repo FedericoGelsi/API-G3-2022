@@ -40,6 +40,8 @@ exports.createClass = async function (clase) {
         duration: clase.duration,
         frequency: clase.frequency,
         cost: clase.cost,
+        currency: clase.currency,
+        type: clase.type,
         rating:clase.rating,
         idProfessor:clase.idProfessor,
         createdDate: new Date()
@@ -85,6 +87,8 @@ exports.updateClass = async function (clase) {
     oldClass.description = clase.description
     oldClass.duration= clase.duration
     oldClass.frequency= clase.frequency
+    oldClass.currency= clase.currency
+    oldClass.type=clase.type
     oldClass.cost= clase.cost
     oldClass.rating= clase.rating
     

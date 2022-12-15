@@ -108,6 +108,8 @@ exports.createClass = async function (req, res) {
             description: req.body.description,
             duration: req.body.duration,
             frequency: req.body.frequency,
+            currency: req.body.currency,
+            type: req.body.type,
             cost: req.body.cost,
             rating: req.body.rating,
             idProfessor: req.body.idProfessor
@@ -143,6 +145,8 @@ exports.updateClass = async function (req, res) {
         description: req.body.description ? req.body.description: null,
         duration: req.body.duration? req.body.duration: null,
         frequency: req.body.frequency? req.body.frequency: null,
+        currency: req.body.currency? req.body.currency: null,
+        type: req.body.type? req.body.type: null,
         cost: req.body.cost? req.body.cost: null,
         rating: req.body.rating? req.body.rating: null
     }

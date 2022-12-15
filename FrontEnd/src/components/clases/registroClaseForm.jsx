@@ -34,7 +34,7 @@ const MuiSelectComponent = ({ children, form, field }) => {
     <Select
       name={name}
       value={value}
-      onChange={e => {
+      onChange={(e) => {
         setFieldValue(name, e.target.value);
       }}
     >
@@ -56,6 +56,8 @@ const RegistroClaseForm = ({ setAuth }) => {
         duration: values.duracion,
         frequency: values.frecuencia,
         cost: values.costo,
+        currency: values.moneda,
+        type: values.type,
         rating: 0,
         idProfessor: userContext.user._id,
       },
@@ -99,6 +101,7 @@ const RegistroClaseForm = ({ setAuth }) => {
       costo: "",
       moneda: "USD",
       descripcion: "",
+      type: "individual"
     },
     validationSchema: SignupSchema,
     onSubmit: (values, actions) => {
@@ -150,7 +153,13 @@ const RegistroClaseForm = ({ setAuth }) => {
                 error={Boolean(touched.duracion && errors.duracion)}
                 helperText={touched.duracion && errors.duracion}
               />
-
+              <FormControl fullWidth>
+                <InputLabel>Tipo</InputLabel>
+                <Field name="type" component={MuiSelectComponent}>
+                  <MenuItem value="individual">Individual</MenuItem>
+                  <MenuItem value="grupal">Grupal</MenuItem>
+                </Field>
+              </FormControl>
               <FormControl fullWidth>
                 <InputLabel>Frecuencia</InputLabel>
                 <Field name="frecuencia" component={MuiSelectComponent}>
@@ -179,9 +188,9 @@ const RegistroClaseForm = ({ setAuth }) => {
               <FormControl fullWidth>
                 <InputLabel>Moneda</InputLabel>
                 <Field name="moneda" component={MuiSelectComponent}>
-                    <MenuItem value="USD">USD</MenuItem>
-                    <MenuItem value="EUR">EUR</MenuItem>
-                    <MenuItem value="ARS">ARS</MenuItem>
+                  <MenuItem value="USD">USD</MenuItem>
+                  <MenuItem value="EUR">EUR</MenuItem>
+                  <MenuItem value="ARS">ARS</MenuItem>
                 </Field>
               </FormControl>
             </Stack>

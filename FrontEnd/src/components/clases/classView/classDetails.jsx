@@ -16,6 +16,7 @@ function ClassDetails(props) {
       <Detail name="Frecuencia" value={clase.frequency} />
       <Detail name="Precio" value={clase.cost + " " + clase.currency} />
       <Detail name="Calificacion" value={clase.rating} variant="rating" />
+      
     </Stack>
   );
 }

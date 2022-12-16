@@ -59,7 +59,13 @@ exports.createContracting = async function (req, res) {
         var Contracting = {
             idClass: req.body.idClass,
             idStudent: req.body.idStudent,
-            status: req.body.status
+            status: req.body.status,
+            phone: req.body.phone,
+            email: req.body.email,
+            from: req.body.from,
+            to: req.body.to,
+            motivo: req.body.motivo
+
         }
     
     try {

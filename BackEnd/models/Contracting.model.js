@@ -7,7 +7,12 @@ var ContractingSchema = new mongoose.Schema({
     idClass: String,
     idStudent: String,
     status: String,
-    createdDate: Date
+    createdDate: Date,
+    phone: Number,
+    email: String,
+    from: String,
+    to: String,
+    motivo: String
 
 });
 

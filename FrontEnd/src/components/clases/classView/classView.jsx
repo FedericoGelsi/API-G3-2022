@@ -22,7 +22,6 @@ export default function VistaClase(props) {
 
 
   const clase = props.clase;
-
   let cardImageUrl = "/img/" + "default.png";
 
   return (
@@ -60,7 +59,7 @@ export default function VistaClase(props) {
                   <Typography variant="button">Contratar</Typography>
                   <ShoppingCart />
                 </Button>
-                <ClassConfirmationPopUp handleClose={handleClose} open={open} />
+                <ClassConfirmationPopUp id = {clase._id} handleClose={handleClose} open={open} />
               </Stack>
             </Grid>
           )}

@@ -8,6 +8,7 @@ import {
 import { ContratacionForm } from "./ContratacionForm";
 
 function ClassConfirmationPopUp(props) {
+  const id = props.id;
   return (
     <Dialog
       open={props.open}
@@ -20,7 +21,7 @@ function ClassConfirmationPopUp(props) {
         <DialogContentText>
           Para contratar esta clase debe ingresar los siguientes datos.
         </DialogContentText>
-        <ContratacionForm handleClose={props.handleClose} />
+        <ContratacionForm idclase = {id} handleClose={props.handleClose} />
       </DialogContent>
     </Dialog>
   );

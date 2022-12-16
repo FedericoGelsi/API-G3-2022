@@ -6,8 +6,27 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect } from "react";
+import { UserContext } from "../../../contexts/UserContext";
+import { POST } from "../../../hooks/apiCrud";
+import { useContext } from "react";
 
 export function ContratacionForm(props) {
+  const userContext = useContext(UserContext);
+
+  const createContract = async (values) => {
+    await POST(
+      "/contracting/registration",values,userContext.token
+    )
+      .then((response) => {
+        alert(response.message);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  
+
   const handleChangeFrom = (newValue) => {
     myForm.setFieldValue("from", newValue);
   };
@@ -18,7 +37,7 @@ export function ContratacionForm(props) {
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const formValidation = Yup.object().shape({
-    telefono: Yup.string()
+    phone: Yup.string()
       .matches(phoneRegExp, "Ingrese un telefono valido")
       .required("Campo requerido"),
     email: Yup.string().email().required("Campo requerido"),
@@ -32,14 +51,19 @@ export function ContratacionForm(props) {
   });
   const myForm = useFormik({
     initialValues: {
-      telefono: "",
+      idClass: props.idclase,
+      idStudent: userContext.user._id,
+      phone: "",
       email: "",
       from: "",
       to: "",
       motivo: "",
+      status:"solicitada",
+
     },
     validationSchema: formValidation,
     onSubmit: (values) => {
+      createContract(values);
       console.log(values); // Crear contratacion en el backend. Llamada a la API
     },
   });
@@ -53,14 +77,14 @@ export function ContratacionForm(props) {
         required
         fullWidth
         margin="dense"
-        name="telefono"
+        name="phone"
         label="Telefono"
         type="tel"
         variant="standard"
-        value={myForm.values.telefono}
+        value={myForm.values.phone}
         onChange={myForm.handleChange}
-        error={!!myForm.errors.telefono}
-        helperText={myForm.errors.telefono}
+        error={!!myForm.errors.phone}
+        helperText={myForm.errors.phone}
       />
       <TextField
         required

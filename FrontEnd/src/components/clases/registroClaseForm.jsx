@@ -45,6 +45,7 @@ const MuiSelectComponent = ({ children, form, field }) => {
 
 const RegistroClaseForm = ({ setAuth }) => {
   const navigate = useNavigate();
+  
   const userContext = useContext(UserContext);
   const createClass = async (values) => {
     await POST(

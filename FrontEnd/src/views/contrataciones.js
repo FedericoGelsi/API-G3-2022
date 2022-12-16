@@ -1,7 +1,7 @@
 import CardContratacion from "../components/contrataciones/CardContratacion";
 import { Grid, Typography } from "@mui/material";
 import GridPage from "../components/GridPage";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import mock from "../data/mock.json";
 import { POST } from "../hooks/apiCrud";
@@ -11,7 +11,17 @@ function Contrataciones(props) {
   const [contracts, setContracts] = useState();
 
   const getProfessorContracts = () => {
-    return mock.contracts;
+    let contracts = POST(
+      "/contracting/byProfessor",
+      { professorId: userContext.user._id },
+      userContext.token
+    )
+      .then((response) => {
+        console.log(response);
+        return response.data.docs;
+      })
+      .catch((error) => console.error(error));
+    return contracts;
   };
 
   const getStudentContracts = () => {
@@ -44,18 +54,25 @@ function Contrataciones(props) {
       userContext.user.type === "professor"
         ? getProfessorContracts()
         : getStudentContracts();
-    contractsData.then((contracts) =>
-      setContracts(
-        contracts.map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <CardContratacion contratacion={_} />
-          </Grid>
-        ))
-      )
-    );
+    contractsData.then(
+      (contracts) => {
+        console.log(contracts);
+        setContracts(
+          contracts.map((_, index) => (
+            <Grid item xs={2} sm={4} md={4} key={index}>
+              <CardContratacion contratacion={_} />
+            </Grid>
+          ))
+        );
+      }
+    )
+    
   };
 
-  getContracts();
+  useEffect(() => {
+    getContracts();
+  }, [contracts]);
+
   return (
     <GridPage>
       <Grid item my={2}>

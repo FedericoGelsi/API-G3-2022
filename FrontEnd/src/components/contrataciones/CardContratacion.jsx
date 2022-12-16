@@ -11,6 +11,7 @@ import { Mail } from "@mui/icons-material";
 import { Class, Status } from "../clases/entities";
 import CardContact from "./CardContact";
 import ClassDetails from "../clases/classView/classDetails";
+import { useState } from "react";
 
 CardContratacion.propTypes = {
   course: PropTypes.instanceOf(Class),
@@ -18,6 +19,10 @@ CardContratacion.propTypes = {
 
 function CardContratacion(props) {
   const [open, setOpen] = React.useState(false);
+  const [clase, setClase] = useState(props.contratacion.class);
+  const [professor, setProfessor] = useState(props.contratacion.class.professor);
+  const [student, setStudent] = useState(props.contratacion.student);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -40,10 +45,9 @@ function CardContratacion(props) {
       return "FINALIZAR";
     }
   };
-  const clase = props.contratacion.class;
 
-  let cardImageUrl = "/img/" + (clase.image ? clase.image : "default.png");
-
+  let cardImageUrl = "/img/" + "default.png";
+  console.log(professor);
   return (
     <Card
       sx={{
@@ -74,16 +78,17 @@ function CardContratacion(props) {
             <CardContent>
               <Typography variant="h4">{clase.name}</Typography>
               <Typography variant="subtitle1">
-                Profesor: {clase.professor.firstname + " " + clase.professor.lastname}
+                Profesor:{" "}
+                {professor.firstname + " " + professor.lastname}
               </Typography>
               <Typography variant="subtitle1">
                 Materia: {clase.subject}
               </Typography>
               <Typography variant="subtitle1">
                 Solicitada por:{" "}
-                {props.contratacion.student.firstname +
+                {student.firstname +
                   " " +
-                  props.contratacion.student.lastname}
+                  student.lastname}
               </Typography>
             </CardContent>
             <ClassDetails clase={clase} />
@@ -108,7 +113,7 @@ function CardContratacion(props) {
             open={open}
           >
             <CardContact
-              user={props.contratacion.student}
+              user={student}
               reason={props.contratacion.reason}
               onClick={handleClose}
             />

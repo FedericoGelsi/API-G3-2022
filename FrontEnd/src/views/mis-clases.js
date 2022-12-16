@@ -1,8 +1,7 @@
 import { Grid, Typography, Fab } from "@mui/material";
 import CardClase from "../components/clases/classCard";
 import GridPage from "../components/GridPage";
-import mock from "../data/mock.json";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -15,46 +14,44 @@ function MisClases(props) {
 
   const filterByClassId = (classes, contracts) => {
     return classes.filter(
-      ({ idClass: id1 }) => !contracts.some(({ idClass: id2 }) => id2 === id1)
+      ({ _id: id1 }) => contracts.some(({ idClass: id2 }) => id2 === id1)
     );
   };
-  const getStudentClasses = () => {
-    const studentContracts = POST(
+  const getStudentClasses = async () => {
+    return await POST(
       "/contracting/byStudent",
       {
         studentId: userContext.user._id,
       },
       userContext.token
     )
-      .then((response) => {
-        return response.data.docs;
+      .then((response) => response.data.docs)
+      .then(async (contracts) => {
+        try {
+          const response = await GET("/class", userContext.token);
+          const clases = response.data.docs;
+          return filterByClassId(clases, contracts);
+        } catch (error) {
+          return console.error(error);
+        }
       })
       .catch((error) => console.error(error));
-    let classes = GET("/class", userContext.token)
-      .then((response) => {
-        return response.data.docs;
-      })
-      .catch((error) => console.error(error));
-    return filterByClassId(classes, studentContracts);
   };
 
-  const getProfessorClasses = () => {
-    let classes = POST(
+  const getProfessorClasses = async () => {
+    return await POST(
       "/class/byProfessor",
       { professor: userContext.user._id },
       userContext.token
     )
-      .then((response) => {
-        return response.data.docs;
-      })
+      .then((response) => response.data.docs)
       .catch((error) => console.error(error));
-    return classes;
   };
 
-  const getMyClasses = () => {
+  const getMyClasses = async () => {
     return userContext.user.type === "student"
-      ? getStudentClasses()
-      : getProfessorClasses();
+      ? await getStudentClasses()
+      : await getProfessorClasses();
   };
 
   const navigate = useNavigate();
@@ -63,20 +60,21 @@ function MisClases(props) {
     navigate("/clases/new");
   };
 
-  getMyClasses().then(
-    function (classesData) {
-      setClasses(
-        classesData.map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <CardClase clase={_} />
-          </Grid>
-        ))
-      );
-    },
-    function (error) {
-      console.error("Could not get classes.", error);
-    }
-  );
+  useEffect(() => {
+    getMyClasses().then(
+      function (classesData) {
+        console.log(classesData);
+        setClasses(
+          classesData.map((_, index) => (
+            <Grid item xs={2} sm={4} md={4} key={index}>
+              <CardClase clase={_} />
+            </Grid>
+          ))
+        );
+      }
+    );
+  }, [classes])
+  
 
   return (
     <GridPage>

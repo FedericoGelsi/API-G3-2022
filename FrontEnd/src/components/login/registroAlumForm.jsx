@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import  { useState,useContext } from "react";
-import { useFormik, Form, FormikProvider } from "formik";
+import { useFormik, Form, FormikProvider,Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import {
   Stack,
@@ -13,6 +13,11 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import * as React from 'react';
 import { POST } from "../../hooks/apiCrud";
@@ -28,6 +33,23 @@ const animate = {
     ease: easing,
     delay: 0.16,
   },
+};
+
+const MuiSelectComponent = ({ children, form, field }) => {
+  const { name, value } = field;
+  const { setFieldValue } = form;
+
+  return (
+    <Select
+      name={name}
+      value={value}
+      onChange={(e) => {
+        setFieldValue(name, e.target.value);
+      }}
+    >
+      {children}
+    </Select>
+  );
 };
 
 
@@ -99,14 +121,6 @@ const RegistroFormAlum = ({  }) => {
     }
   };
 
-  const estudiosCbx = [
-    'Primario Incompleto', 
-    'Primario Completo',
-    'Secundario Incompleto',
-    'Secundario Completo',
-    'Universitario Incompleto',
-    'Universitario Completo'
-  ];
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps  } = formik;
   
@@ -174,23 +188,17 @@ const RegistroFormAlum = ({  }) => {
               helperText={touched.birthDate && errors.birthDate}
             />
 
-            <Autocomplete              
-              fullWidth
-              options={estudiosCbx}
-              renderInput={(params) => <TextField {...params} label="Estudios" 
-              {...getFieldProps("education")}
-              />}
-            />
-
-
-            {/* <FormControl fullWidth>
+            <FormControl fullWidth>
                 <InputLabel>Estudios</InputLabel>
-                <Field name="estudios" component={MuiSelectComponent}>
-                  <MenuItem value="unica">Unica</MenuItem>
-                  <MenuItem value="semanal">Semanal</MenuItem>
-                  <MenuItem value="mensual">Mensual</MenuItem>
+                <Field name="education" component={MuiSelectComponent}>
+                  <MenuItem value="primario completo">Primario Completo</MenuItem>
+                  <MenuItem value="primario incompleto">Primario Incompleto</MenuItem>
+                  <MenuItem value="secundario completo">Secundario Completo</MenuItem>
+                  <MenuItem value="secundario incompleto">Secundario Incompleto</MenuItem>
+                  <MenuItem value="universitario completo">Universitario Completo</MenuItem>
+                  <MenuItem value="universitario incompleto">Universitario Incompleto</MenuItem>
                 </Field>
-            </FormControl> */}
+            </FormControl>
 
             <TextField
               fullWidth

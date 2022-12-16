@@ -11,13 +11,6 @@ import {
 import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
 
-const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
-  city: "Buenos Aires",
-  country: "Argentina",
-  jobTitle: "Ing Quimico",
-  name: "Juan Lopez",
-};
 
 export const PerfilProf = (props) => {
   const userContext = useContext(UserContext);
@@ -40,10 +33,9 @@ export const PerfilProf = (props) => {
             }}
           />
           <Typography color="textPrimary" gutterBottom variant="h5">
-            {userContext.user.firstname + " " + userContext.user.lastname}
+            {userContext.user.name + " " + userContext.user.lastName}
           </Typography>
           <Typography color="textSecondary" variant="body2">
-            {`${user.city} ${user.country}`}
           </Typography>
         </Box>
       </CardContent>

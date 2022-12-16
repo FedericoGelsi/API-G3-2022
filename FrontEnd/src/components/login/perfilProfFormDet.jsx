@@ -14,22 +14,10 @@ import { useContext } from "react";
 
 
 export const PerfilDetalleProf = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Juan',
-    lastName: 'Lopez',
-    email: 'demo@profesor.com',
-    phone: '',
-    birthdate:'11/03/1980',
-    title: 'Ing Quimico',
-    experience: '2 anios en la UBA'
-
-  });
+  
   const userContext = useContext(UserContext);
   const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
+    
   };
 
   return (
@@ -61,7 +49,7 @@ export const PerfilDetalleProf = (props) => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={userContext.user.firstname}
+                value={userContext.user.name}
                 variant="outlined"
               />
             </Grid>
@@ -76,7 +64,7 @@ export const PerfilDetalleProf = (props) => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={userContext.user.lastname}
+                value={userContext.user.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -91,7 +79,7 @@ export const PerfilDetalleProf = (props) => {
                 name="email"
                 onChange={handleChange}
                 required
-                value={userContext.user.mail}
+                value={userContext.user.email}
                 variant="outlined"
               />
             </Grid>
@@ -106,7 +94,7 @@ export const PerfilDetalleProf = (props) => {
                 name="birthdate"
                 onChange={handleChange}
                 //type="date"
-                value={userContext.user.birthdate}
+                value={userContext.user.birthDate}
                 variant="outlined"
               />
             </Grid>
@@ -120,7 +108,7 @@ export const PerfilDetalleProf = (props) => {
                 label="phone"
                 name="phone"
                 onChange={handleChange}
-                type="number"
+                type="Number"
                 value={userContext.user.phone}
                 variant="outlined"
               />
@@ -136,7 +124,7 @@ export const PerfilDetalleProf = (props) => {
                 name="title"
                 onChange={handleChange}
                 required
-                value={userContext.user.degree}
+                value={userContext.user.title}
                 variant="outlined"
               />
             </Grid>
@@ -151,7 +139,7 @@ export const PerfilDetalleProf = (props) => {
                 name="experience"
                 onChange={handleChange}
                 required
-                value={values.experience}
+                value={userContext.user.experience}
                 variant="outlined"
               />
             </Grid>

@@ -28,10 +28,6 @@ export default function CardClase(props) {
           }}
         />
         <CardContent>
-          <Typography variant="subtitle2" color="secondary">
-            Profesor -{" "}
-            {/* {clase.professor.firstname + " " + clase.professor.lastname} */}
-          </Typography>
           <Typography variant="h4" color="text.primary">
             {clase.name}
           </Typography>

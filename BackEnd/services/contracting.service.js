@@ -37,6 +37,11 @@ exports.createContracting = async function (contracting) {
         idClass: contracting.idClass,
         idStudent: contracting.idStudent,
         status: contracting.status,
+        phone: contracting.phone,
+        email: contracting.email,
+        from: contracting.from,
+        to: contracting.to,
+        motivo: contracting.motivo,
         createdDate: new Date()
     })
     

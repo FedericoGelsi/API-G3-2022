@@ -20,8 +20,8 @@ export default function VistaClase(props) {
     setOpen(false);
   };
 
+
   const clase = props.clase;
-  console.log(clase);
 
   let cardImageUrl = "/img/" + "default.png";
 
@@ -81,7 +81,7 @@ export default function VistaClase(props) {
             </Stack>
           </Grid>
           <Grid item xs={2} sm={8} md={12} order={{ xs: 2, sm: 4, md: 4 }}>
-            <ProfessorDetails professor={clase.professor} />
+            <ProfessorDetails professor={props.professor} />
           </Grid>
           <Grid item xs={2} sm={8} md={12} order={{ xs: 5, sm: 4, md: 4 }}>
             <Typography variant="h5" color="text.primary">

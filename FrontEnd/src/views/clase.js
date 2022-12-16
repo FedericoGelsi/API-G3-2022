@@ -10,13 +10,28 @@ import { UserContext } from "../contexts/UserContext";
 function Clase() {
   let params = useParams();
   const userContext = useContext(UserContext);
-  const [clase, setClase] = useState();
+  const [clase, setClase] = useState(<></>);
 
   function getClass(claseId) {
-    console.log(claseId);
     POST("/class/byId", { id: claseId }, userContext.token)
       .then((response) => {
-        setClase(response.data.docs);
+        getProfessor(response.data.docs[0]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function getProfessor(clase) {
+    POST("/users/", { id: clase.idProfessor }, userContext.token)
+      .then((response) => {
+        setClase(
+          <VistaClase
+            clase={clase}
+            professor={response.getUser.user}
+            variant={variant}
+          />
+        );
       })
       .catch((error) => {
         console.error(error);
@@ -32,9 +47,7 @@ function Clase() {
       <Grid item my={2}>
         <BackButtonBar />
       </Grid>
-      <Grid item>
-        <VistaClase clase={clase} variant={variant} />
-      </Grid>
+      <Grid item>{clase}</Grid>
     </GridPage>
   );
 }

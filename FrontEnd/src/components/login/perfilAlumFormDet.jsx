@@ -10,25 +10,38 @@ import {
   TextField,
 } from "@mui/material";
 import { useContext } from "react";
+
+import { PUT } from "../../hooks/apiCrud";
 import { UserContext } from "../../contexts/UserContext";
 
 export const PerfilDetalleAlum = (props) => {
-  const [values, setValues] = useState({
-    name: "Juan",
-    lastName: "Lopez",
-    email: "demo@profesor.com",
-    phone: "",
-    birthdate: "11/03/1980",
-    education: "Ing Quimico",
-  });
-
+ 
   const userContex = useContext(UserContext);
 
+  const putUser = async (values) => {
+    await PUT(
+      "/users/update",
+      {
+        name: values.name,
+        lastName: values.lastName,
+        email: values.email,
+        birthDate: values.birthDate,
+        phone: values.phone,
+        education: values.education,
+      },
+      userContex.token
+    )
+      .then((response) => {
+        alert(response.message);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
   const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+    
   };
 
   return (
@@ -57,7 +70,7 @@ export const PerfilDetalleAlum = (props) => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={userContex.user.lastname}
+                value={userContex.user.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -68,7 +81,7 @@ export const PerfilDetalleAlum = (props) => {
                 name="email"
                 onChange={handleChange}
                 required
-                value={userContex.user.mail}
+                value={userContex.user.email}
                 variant="outlined"
               />
             </Grid>
@@ -76,13 +89,14 @@ export const PerfilDetalleAlum = (props) => {
               <TextField
                 fullWidth
                 label="Fecha de Nacimiento"
-                name="birthdate"
+                name="birthDate"
                 onChange={handleChange}
                 //type="date"
-                value={userContex.user.birthdate}
+                value={userContex.user.birthDate}
                 variant="outlined"
               />
             </Grid>
+
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
@@ -94,34 +108,19 @@ export const PerfilDetalleAlum = (props) => {
                 variant="outlined"
               />
             </Grid>
-            {userContex.user.degrees.map((degree) => {
-              return (
-                <Grid item container direction="row" spacing={3} md={12} xs={24}>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      label="Estudio"
-                      name="estudio"
-                      onChange={handleChange}
-                      required
-                      value={degree.title}
-                      variant="outlined"
-                    />
-                  </Grid>
-                  <Grid item  md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      label="Estado"
-                      name="estado"
-                      onChange={handleChange}
-                      required
-                      value={degree.status}
-                      variant="outlined"
-                    />
-                  </Grid>
-                </Grid>
-              );
-            })}
+
+            <Grid item md={12} xs={24}>
+              <TextField
+                fullWidth
+                label="education"
+                name="education"
+                onChange={handleChange}
+                required
+                value={userContex.user.education}
+                variant="outlined"
+              />
+            </Grid>
+             
           </Grid>
         </CardContent>
         <Divider />
@@ -132,7 +131,7 @@ export const PerfilDetalleAlum = (props) => {
             p: 2,
           }}
         >
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={putUser}>
             Guardar
           </Button>
         </Box>

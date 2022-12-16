@@ -7,15 +7,15 @@ import mock from "../data/mock.json";
 import { POST } from "../hooks/apiCrud";
 function Contrataciones(props) {
   const userContext = useContext(UserContext);
-  
+
   const [contracts, setContracts] = useState();
 
   const getProfessorContracts = () => {
     return mock.contracts;
   };
 
-  const getStudentContracts = async () => {
-    let contracts = await POST(
+  const getStudentContracts = () => {
+    let contracts = POST(
       "/contracting/byStudent",
       { studentId: userContext.user._id },
       userContext.token
@@ -26,42 +26,36 @@ function Contrataciones(props) {
       .catch((error) => console.error(error));
     return contracts;
   };
-  
+
   const getClassbyId = async (idClass) => {
     return await POST(
-      "/class/byId" ,
-        ({
-          id: idClass,
-        }),
+      "/class/byId",
+      {
+        id: idClass,
+      },
       userContext.token
     ).then((response) => {
-       return response.data.docs;
+      return response.data.docs;
     });
   };
-  
 
   const getContracts = () => {
-    return userContext.user.type === "professor"
-      ? getProfessorContracts()
-      : getStudentContracts();
-  };
-
-  getContracts().then(
-    function (contractsData) {
-      console.log(contractsData);
+    let contractsData =
+      userContext.user.type === "professor"
+        ? getProfessorContracts()
+        : getStudentContracts();
+    contractsData.then((contracts) =>
       setContracts(
-        contractsData.map((_, index) => (
+        contracts.map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <CardContratacion contract={_} />
+            <CardContratacion contratacion={_} />
           </Grid>
         ))
-      );
-    },
-    function (error) {
-      console.error("Could not get contracts.", error);
-    }
-  );
+      )
+    );
+  };
 
+  getContracts();
   return (
     <GridPage>
       <Grid item my={2}>

@@ -63,7 +63,6 @@ function MisClases(props) {
   useEffect(() => {
     getMyClasses().then(
       function (classesData) {
-        console.log(classesData);
         setClasses(
           classesData.map((_, index) => (
             <Grid item xs={2} sm={4} md={4} key={index}>

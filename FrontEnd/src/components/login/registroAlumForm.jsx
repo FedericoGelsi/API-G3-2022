@@ -183,14 +183,14 @@ const RegistroFormAlum = ({  }) => {
             />
 
 
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
                 <InputLabel>Estudios</InputLabel>
                 <Field name="estudios" component={MuiSelectComponent}>
                   <MenuItem value="unica">Unica</MenuItem>
                   <MenuItem value="semanal">Semanal</MenuItem>
                   <MenuItem value="mensual">Mensual</MenuItem>
                 </Field>
-            </FormControl>
+            </FormControl> */}
 
             <TextField
               fullWidth

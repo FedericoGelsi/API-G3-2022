@@ -89,7 +89,7 @@ const RegistroClaseForm = ({ setAuth }) => {
 
   const handleCreation = (values) => {
     createClass(values);
-    navigate("/", { replace: true });
+    navigate("/mis-clases", { replace: true });
   };
 
   const formik = useFormik({

@@ -11,10 +11,10 @@ function ClassDetails(props) {
       spacing={1}
       divider={<Divider orientation="horizontal" flexItem />}
     >
-      <Detail name="Duracion" value={clase.courselength} />
+      <Detail name="Duracion" value={clase.duration} />
       <Detail name="Tipo" value={clase.type} />
-      <Detail name="Frecuencia" value={clase.frec} />
-      <Detail name="Precio" value={clase.price} />
+      <Detail name="Frecuencia" value={clase.frequency} />
+      <Detail name="Precio" value={clase.cost + " " + clase.currency} />
       <Detail name="Calificacion" value={clase.rating} variant="rating" />
     </Stack>
   );

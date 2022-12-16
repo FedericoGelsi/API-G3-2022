@@ -18,7 +18,6 @@ function ProfessorDetails(props) {
   };
 
   let professor = props.professor;
-
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -32,12 +31,12 @@ function ProfessorDetails(props) {
         sx={{ p: 0 }}
       >
         <Stack direction="row" spacing={2} width="100%" alignItems="center">
-          <Avatar src={professor.avatar}>
-            {professor.firstname[0]}
-            {professor.lastname[0]}
+          <Avatar>
+            {professor.name}
+            {professor.lastName}
           </Avatar>
           <Typography variant="body1" color="secondary" flexGrow={1}>
-            Profesor - {professor.firstname + " " + professor.lastname}
+            Profesor - {professor.name + " " + professor.lastName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Ver mas
@@ -46,17 +45,7 @@ function ProfessorDetails(props) {
       </AccordionSummary>
       <AccordionDetails>
         <Stack>
-          {professor.experience.map((_, index) => (
-            <Stack
-              direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
-              spacing={2}
-              key={index}
-            >
-              <Typography flexGrow={1}>{_.title}</Typography>
-              <Typography flexGrow={1}>{_.description}</Typography>
-            </Stack>
-          ))}
+          <Typography flexGrow={1}>{professor.experience}</Typography>
         </Stack>
       </AccordionDetails>
     </Accordion>

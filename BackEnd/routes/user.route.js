@@ -10,7 +10,7 @@ var Authorization = require('../auth/authorization');
 
 router.post('/registration', UserController.createUser)
 router.post('/login', UserController.loginUser)
-router.get('/', Authorization, UserController.getUser)
+router.post('/', Authorization, UserController.getUser)
 router.put('/update', Authorization, UserController.updateUser)
 router.delete('/:id', Authorization, UserController.removeUser)
 router.post('/sendMail',MailController.sendEmail)

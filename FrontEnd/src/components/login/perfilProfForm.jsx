@@ -36,6 +36,7 @@ export const PerfilProf = (props) => {
             {userContext.user.name + " " + userContext.user.lastName}
           </Typography>
           <Typography color="textSecondary" variant="body2">
+          {`${"Buenos Aires - "} ${"Argentina"}`}
           </Typography>
         </Box>
       </CardContent>
